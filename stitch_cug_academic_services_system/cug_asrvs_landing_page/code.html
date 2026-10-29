@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUG ASRVS - Catholic University of Ghana Academic Services Request &amp; Verification System</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader (Headlines) & Public Sans (Body/UI) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&amp;family=Public+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f9f9ff",
+            "primary-fixed-dim": "#ffb2bc",
+            "secondary": "#775a00",
+            "on-tertiary-fixed-variant": "#3a485c",
+            "on-background": "#111c2d",
+            "outline-variant": "#dac0c2",
+            "inverse-primary": "#ffb2bc",
+            "on-secondary-fixed-variant": "#5a4300",
+            "on-primary-container": "#ee8495",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#172538",
+            "on-primary-fixed-variant": "#7c2a3b",
+            "on-surface": "#111c2d",
+            "primary": "#4e051a",
+            "tertiary-container": "#2d3b4f",
+            "tertiary-fixed-dim": "#b9c7e0",
+            "surface": "#f9f9ff",
+            "error": "#ba1a1a",
+            "secondary-container": "#fece57",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f0f3ff",
+            "surface-container": "#e7eeff",
+            "on-secondary-fixed": "#251a00",
+            "outline": "#877274",
+            "on-primary-fixed": "#400013",
+            "on-secondary-container": "#735700",
+            "on-error": "#ffffff",
+            "surface-variant": "#d8e3fb",
+            "surface-container-highest": "#d8e3fb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#dee8ff",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#0d1c2f",
+            "surface-dim": "#cfdaf2",
+            "primary-container": "#6b1d2f",
+            "inverse-surface": "#263143",
+            "secondary-fixed": "#ffdf98",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#544244",
+            "on-tertiary-container": "#97a5bd",
+            "background": "#f9f9ff",
+            "primary-fixed": "#ffd9dd",
+            "tertiary-fixed": "#d5e3fd",
+            "surface-tint": "#9a4152",
+            "inverse-on-surface": "#ecf1ff",
+            "secondary-fixed-dim": "#eec14b",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Newsreader"],
+            "label-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Newsreader"],
+            "title-md": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "display-lg-mobile": ["Newsreader"],
+            "title-lg": ["Public Sans"],
+            "headline-lg": ["Newsreader"],
+            "label-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "headline-sm": ["Newsreader"],
+            "display-lg": ["Newsreader"],
+            "label-md": ["Public Sans"],
+            "title-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .gold-seal-border {
+      box-shadow: 0 0 0 1px #C59B27, inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    .institutional-mesh {
+      background-image: radial-gradient(circle at 10% 20%, rgba(107, 29, 47, 0.04) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(197, 155, 39, 0.05) 0%, transparent 40%);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed pb-24">
+<!-- ========================================================================= -->
+<!-- NAVIGATION DRAWER (Slide-over component based on Shared Components JSON)   -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 bg-tertiary/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300" id="drawer-backdrop"></div>
+<aside class="fixed inset-y-0 left-0 z-50 flex flex-col p-4 w-80 max-w-[85vw] bg-surface-container-lowest dark:bg-inverse-surface shadow-xl -translate-x-full transition-transform duration-300 ease-in-out border-r border-outline-variant" id="nav-drawer">
+<!-- Drawer Header -->
+<div class="flex items-start justify-between pb-4 border-b border-surface-container">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-white flex items-center justify-center font-headline-md font-bold text-headline-sm gold-seal-border">
+          CUG
+        </div>
+<div>
+<div class="font-title-md text-title-md text-primary font-bold">Academic Services Registry</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Catholic University of Ghana</div>
+<div class="font-label-sm text-label-sm text-secondary font-medium tracking-wide">Sunyani - Fiapre Campus</div>
+</div>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" id="close-drawer-btn">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+<!-- Drawer Navigation Links -->
+<nav class="flex-1 py-4 space-y-1.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-title-sm text-title-sm font-semibold transition-all" href="#services">
+<span class="material-symbols-outlined text-[20px]">folder_shared</span>
+        My Applications
+      </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary rounded-lg font-title-sm text-title-sm transition-all" href="#verify">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+        Verify Certificate
+      </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary rounded-lg font-title-sm text-title-sm transition-all" href="#fees">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+        Fee Schedule
+      </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary rounded-lg font-title-sm text-title-sm transition-all" href="#registry">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+        Fiapre Registry Info
+      </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary rounded-lg font-title-sm text-title-sm transition-all" href="#support">
+<span class="material-symbols-outlined text-[20px]">contact_support</span>
+        Student Support
+      </a>
+</nav>
+<!-- Drawer Footer -->
+<div class="pt-4 border-t border-surface-container flex flex-col gap-2">
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/60">
+<p class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Official Registrar Seal</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Fiapre-Sunyani Academic Office Verified Terminal</p>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- TOP APP BAR (Shared Components: TopAppBar)                                -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md shadow-sm border-b border-outline-variant">
+<div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+<!-- Leading: Drawer toggle & Crest Identity -->
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 text-on-surface hover:text-primary rounded-lg hover:bg-surface-container-low active:scale-95 transition-all" id="open-drawer-btn">
+<span class="material-symbols-outlined text-[26px]">menu</span>
+</button>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-sm font-bold tracking-tight text-primary leading-none">
+            CUG ASRVS
+          </span>
+<span class="font-label-sm text-[10px] text-secondary font-semibold uppercase tracking-wider mt-0.5">
+            Catholic University of Ghana
+          </span>
+</div>
+</div>
+<!-- Quick Web Links (Visible on desktop/tablet) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#services">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#how-it-works">Request Process</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#track-status">Track</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#faq">Help</a>
+</nav>
+<!-- Trailing Action: Institutional Security Badge -->
+<div class="flex items-center gap-2">
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 border border-primary text-primary hover:bg-primary-container/10 font-label-md text-label-md rounded font-medium transition-all" href="#track-status">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+<span>Track Order</span>
+</a>
+<div class="flex items-center gap-1 text-secondary bg-secondary-fixed/30 border border-secondary-fixed px-2.5 py-1 rounded-full text-label-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="hidden xs:inline">Fiapre Registry</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- HERO SECTION                                                              -->
+<!-- ========================================================================= -->
+<section class="relative overflow-hidden bg-primary text-white institutional-mesh pt-7 pb-10 px-4 md:py-16">
+<!-- Subtle institutional watermarks -->
+<div class="absolute -right-12 -bottom-16 opacity-10 pointer-events-none select-none text-[220px] font-headline-lg font-bold text-secondary-container">
+      CUG
+    </div>
+<div class="max-w-4xl mx-auto relative z-10 flex flex-col items-start">
+<!-- Location & Institutional Subheading Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full border border-secondary-fixed/40 backdrop-blur-sm mb-4">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span class="font-label-sm text-label-sm tracking-wide text-secondary-fixed uppercase">
+          Sunyani - Fiapre Campus • Academic Affairs Registry
+        </span>
+</div>
+<!-- Hero Headline -->
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold tracking-tight text-white mb-3 max-w-2xl">
+        Academic Services, <span class="italic font-normal text-secondary-fixed">Made Simpler.</span>
+</h1>
+<!-- Hero Subtext -->
+<p class="font-body-md md:font-body-lg text-body-md md:text-body-lg text-surface-container-high/90 max-w-xl mb-6">
+        Official online portal for CUG students and alumni to request certified academic transcripts, English proficiency letters, attestation letters, and certificates without an account login.
+      </p>
+<!-- Call To Actions -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center w-full sm:w-auto gap-3 pt-1">
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary-container text-white font-title-sm text-title-sm rounded shadow-md hover:bg-primary-container/90 active:scale-95 transition-all text-center border border-white/20" href="#request-wizard">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Start a Request</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border-1.5 border-secondary-fixed text-secondary-fixed hover:bg-secondary-fixed/10 font-title-sm text-title-sm rounded transition-all text-center" href="#track-status">
+<span class="material-symbols-outlined text-[18px]">find_in_page</span>
+<span>Track My Request</span>
+</a>
+</div>
+<!-- Quick Trust Counters -->
+<div class="grid grid-cols-3 gap-2 w-full pt-8 mt-6 border-t border-white/15">
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-secondary-fixed">100%</div>
+<div class="font-label-sm text-label-sm text-surface-variant font-normal">Accredited &amp; Official</div>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-secondary-fixed">24-72h</div>
+<div class="font-label-sm text-label-sm text-surface-variant font-normal">Fast-Track Available</div>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-secondary-fixed">MoMo/Card</div>
+<div class="font-label-sm text-label-sm text-surface-variant font-normal">Approved Gateway</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- PROCESS SECTION ("How It Works")                                          -->
+<!-- ========================================================================= -->
+<section class="py-10 px-4 max-w-5xl mx-auto" id="how-it-works">
+<div class="mb-6">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Standard Administrative Pipeline</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mt-1">
+        How It Works
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+        A seamless 4-step verified workflow connecting you directly to the Fiapre Academic Registry.
+      </p>
+</div>
+<!-- Stepper Grid / Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-title-sm text-title-sm font-bold">1</span>
+<span class="material-symbols-outlined text-outline-variant text-[22px]">badge</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-1">Enter Student Information</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Input index number, graduation year, or programme. System matches registry bio-data securely.
+          </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-low flex items-center gap-1.5 text-secondary text-label-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>No login required</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-title-sm text-title-sm font-bold">2</span>
+<span class="material-symbols-outlined text-outline-variant text-[22px]">checklist_rtl</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-1">Select Services &amp; Delivery</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Add transcripts, attestations, or English letters with customizable copy counts &amp; dispatch options.
+          </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-low flex items-center gap-1.5 text-secondary text-label-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">calculate</span>
+<span>Transparent pricing</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-title-sm text-title-sm font-bold">3</span>
+<span class="material-symbols-outlined text-outline-variant text-[22px]">payments</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-1">Review Order &amp; Pay</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Confirm fee schedule breakdown. Pay seamlessly with MTN MoMo, Telecel, AT Money, or Visa/Mastercard.
+          </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-low flex items-center gap-1.5 text-secondary text-label-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Instant receipt issued</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-title-sm text-title-sm font-bold">4</span>
+<span class="material-symbols-outlined text-outline-variant text-[22px]">mark_email_read</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-1">Track Progress</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Follow live stages: Registry Search, Transcript Printing, Registrar Endorsement, and Final Dispatch.
+          </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-low flex items-center gap-1.5 text-secondary text-label-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">sms</span>
+<span>SMS/Email notifications</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- REQUEST WIZARD / ORDER ENGINE PREVIEW                                     -->
+<!-- ========================================================================= -->
+<section class="py-6 px-4 max-w-5xl mx-auto" id="request-wizard">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-md p-5 sm:p-7">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Direct Application Desk</span>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">New Academic Services Request</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select documents required. You can request multiple items simultaneously.</p>
+</div>
+<div class="inline-flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant/60 text-body-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">school</span>
+<span class="font-medium text-on-surface">Campus: Fiapre - Sunyani</span>
+</div>
+</div>
+<!-- Student Bio Lookup Fields -->
+<div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">
+            Student Index / ID Number <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 bg-white border border-outline-variant rounded text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-mono" placeholder="e.g. CUG/UG/BS/20/0942" type="text"/>
+<span class="absolute right-3 top-2.5 text-on-surface-variant material-symbols-outlined text-[20px]">search</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant mt-1 block">Alumni prior to 2010 may supply Reg Number</span>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">
+            Full Name (As on Certificate) <span class="text-error">*</span>
+</label>
+<input class="w-full px-3.5 py-2.5 bg-white border border-outline-variant rounded text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="e.g. Samuel Kwadwo Mensah" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">
+            Applicant Mobile / WhatsApp <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 bg-white border border-outline-variant rounded text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="024 000 0000" type="tel"/>
+<span class="absolute right-3 top-2.5 text-secondary material-symbols-outlined text-[20px]">sms</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- AVAILABLE SERVICES PREVIEW GRID                                           -->
+<!-- ========================================================================= -->
+<section class="py-8 px-4 max-w-5xl mx-auto" id="services">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Standard Document Schedule</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mt-0.5">Available Academic Services</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select quantities for your cart. Additional copies enjoy reduced processing levies.</p>
+</div>
+<div class="mt-2 sm:mt-0 font-label-md text-label-md text-primary font-bold">
+        Prices in Ghana Cedis (GHS)
+      </div>
+</div>
+<!-- Cards Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Service 1: Official Transcript -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">description</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 50<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">Official Academic Transcript</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Complete certified record of courses, grade points, and semester standings embossed with university dry seal.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">1</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-primary-container text-white text-label-sm font-semibold rounded hover:bg-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+<!-- Service 2: English Proficiency Letter -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">translate</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 40<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">English Proficiency Letter</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Formal attestation stating English was the primary medium of instruction and examinations across your degree.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">0</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface text-label-sm font-semibold rounded hover:bg-primary-container hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+<!-- Service 3: Attestation Letter -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">assignment_turned_in</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 35<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">Attestation Letter</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Interim document verifying completion of academic requirements pending full graduation or certificate release.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">0</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface text-label-sm font-semibold rounded hover:bg-primary-container hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+<!-- Service 4: Certified True Copy -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 30<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">Certified True Copy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Authentication and registry stamping of previously awarded degree or diploma parchment photocopies.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">0</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface text-label-sm font-semibold rounded hover:bg-primary-container hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+<!-- Service 5: Recommendation Letter -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">recommend</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 40<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">Recommendation Letter</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Institutional introductory reference endorsed by Dean or Registry for postgrad applications or visas.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">0</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface text-label-sm font-semibold rounded hover:bg-primary-container hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+<!-- Service 6: Special Statement of Results -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm hover:border-primary/50 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div class="p-2 rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">fact_check</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">GHS 25<span class="font-body-sm text-body-sm text-on-surface-variant font-normal"> /copy</span></span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mt-3">Statement of Results</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+            Interim semester-by-semester statement issued for active undergraduate and diploma students.
+          </p>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">-</button>
+<span class="font-title-sm text-title-sm px-2 font-mono">0</span>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors">+</button>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface text-label-sm font-semibold rounded hover:bg-primary-container hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- DELIVERY & PICKUP HIGHLIGHTS                                              -->
+<!-- ========================================================================= -->
+<section class="py-8 px-4 max-w-5xl mx-auto">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-5 md:p-8">
+<div class="mb-6">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Fulfillment Logistics</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mt-0.5">Delivery &amp; Pickup Channels</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select your preferred dispatch method when completing your checkout.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+<!-- Option 1: Registry Pickup -->
+<label class="relative flex flex-col p-4 bg-white rounded-lg border-2 border-primary cursor-pointer shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-[24px]">storefront</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-800 text-label-sm font-bold rounded">GHS 0.00</span>
+</div>
+<span class="font-title-sm text-title-sm font-bold text-on-surface mt-2.5">Fiapre Registry Pickup</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-1">
+            Pick up directly at the Main Administration Registry Block, Catholic University of Ghana, Fiapre.
+          </span>
+<div class="mt-3 flex items-center gap-1.5 text-label-sm text-primary font-bold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Default selected
+          </div>
+</label>
+<!-- Option 2: Authorized Proxy -->
+<label class="relative flex flex-col p-4 bg-white rounded-lg border border-outline-variant hover:border-primary/50 cursor-pointer shadow-sm transition-colors">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary text-[24px]">group</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-800 text-label-sm font-bold rounded">GHS 0.00</span>
+</div>
+<span class="font-title-sm text-title-sm font-bold text-on-surface mt-2.5">Authorized Proxy Pickup</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-1">
+            Assign a designated representative with signed authorization letter and national photo ID card.
+          </span>
+<div class="mt-3 text-label-sm text-on-surface-variant">Letter format required</div>
+</label>
+<!-- Option 3: Secure Digital PDF -->
+<label class="relative flex flex-col p-4 bg-white rounded-lg border border-outline-variant hover:border-primary/50 cursor-pointer shadow-sm transition-colors">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary text-[24px]">forward_to_inbox</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-800 text-label-sm font-bold rounded">GHS 0.00</span>
+</div>
+<span class="font-title-sm text-title-sm font-bold text-on-surface mt-2.5">Secure Institutional Email</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-1">
+            Official cryptographically signed PDF sent straight to recipient university/embassy registry.
+          </span>
+<div class="mt-3 text-label-sm text-on-surface-variant">Certified official e-dispatch</div>
+</label>
+<!-- Option 4: Ghana Post EMS -->
+<label class="relative flex flex-col p-4 bg-white rounded-lg border border-outline-variant hover:border-primary/50 cursor-pointer shadow-sm transition-colors">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary text-[24px]">local_shipping</span>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold rounded">GHS 50.00</span>
+</div>
+<span class="font-title-sm text-title-sm font-bold text-on-surface mt-2.5">Ghana Post EMS (Domestic)</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-1">
+            Nationwide courier dispatch to any address in Accra, Kumasi, Takoradi, Tamale, or regional capitals.
+          </span>
+<div class="mt-3 text-label-sm text-on-surface-variant">2-4 business days post-print</div>
+</label>
+<!-- Option 5: DHL Express International -->
+<label class="relative flex flex-col p-4 bg-white rounded-lg border border-outline-variant hover:border-primary/50 cursor-pointer shadow-sm transition-colors sm:col-span-2 lg:col-span-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[24px]">flight_takeoff</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">DHL Worldwide International Courier</span>
+</div>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold rounded">GHS 350.00</span>
+</div>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-2">
+            Priority international air dispatch for foreign graduate schools (UK, USA, Canada, Germany, etc.). Full door-to-door tracking code provided instantly upon courier dispatch.
+          </span>
+<div class="mt-3 flex items-center gap-2 text-label-sm text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">public</span> Global expedited 3-5 days delivery
+          </div>
+</label>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- TRACK ORDER SECTION (Interactive Status Preview)                         -->
+<!-- ========================================================================= -->
+<section class="py-8 px-4 max-w-5xl mx-auto" id="track-status">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-md p-5 sm:p-7">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 border-b border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Real-Time Registry Query</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Track Your Application</h2>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-green-700">radio_button_checked</span>
+<span>Fiapre Registry Server: Online</span>
+</div>
+</div>
+<!-- Query input form -->
+<div class="mt-5 flex flex-col sm:flex-row gap-3">
+<div class="relative flex-1">
+<input class="w-full px-3.5 py-3 bg-white border border-outline-variant rounded text-body-md text-on-surface font-mono focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="Enter Reference Code (e.g. CUG-ASR-2024-XXXX)" type="text" value="CUG-ASR-2024-8891"/>
+</div>
+<button class="px-6 py-3 bg-primary text-white font-title-sm text-title-sm rounded hover:bg-primary-container active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<span>Query Status</span>
+</button>
+</div>
+<!-- Sample Tracking Result Card -->
+<div class="mt-6 p-4 sm:p-5 rounded-lg bg-surface-container-low border border-outline-variant">
+<!-- Result Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-outline-variant/60">
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Order Reference:</span>
+<span class="font-title-md text-title-md font-bold text-primary font-mono ml-1">CUG-ASR-2024-8891</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-900 border border-yellow-300 rounded-full font-label-sm text-label-sm font-semibold self-start sm:self-auto">
+<span class="w-2 h-2 rounded-full bg-yellow-600 animate-pulse"></span>
+            Registrar Signing &amp; Embossing
+          </span>
+</div>
+<!-- Student & Document Metadata -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3.5 text-body-sm">
+<div>
+<div class="text-on-surface-variant font-label-sm">Applicant</div>
+<div class="font-semibold text-on-surface mt-0.5">Emmanuel Mensah</div>
+</div>
+<div>
+<div class="text-on-surface-variant font-label-sm">Programme</div>
+<div class="font-semibold text-on-surface mt-0.5">B.Sc. Computer Science (2022)</div>
+</div>
+<div>
+<div class="text-on-surface-variant font-label-sm">Requested Items</div>
+<div class="font-semibold text-on-surface mt-0.5">2x Official Transcript</div>
+</div>
+<div>
+<div class="text-on-surface-variant font-label-sm">Delivery Target</div>
+<div class="font-semibold text-on-surface mt-0.5">Ghana Post EMS (Accra)</div>
+</div>
+</div>
+<!-- Milestone Stepper -->
+<div class="mt-3 pt-3 border-t border-outline-variant/60">
+<div class="grid grid-cols-4 gap-2 text-center">
+<!-- Step 1 Done -->
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">✓</div>
+<span class="font-label-sm text-[11px] font-bold text-primary mt-1">Payment Received</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Oct 24, 09:15</span>
+</div>
+<!-- Step 2 Done -->
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">✓</div>
+<span class="font-label-sm text-[11px] font-bold text-primary mt-1">Record Retrieved</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Oct 24, 14:30</span>
+</div>
+<!-- Step 3 Active -->
+<div class="flex flex-col items-center">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container border-2 border-secondary flex items-center justify-center font-bold text-xs">3</div>
+<span class="font-label-sm text-[11px] font-bold text-secondary mt-1">Registrar Seal</span>
+<span class="font-body-sm text-[10px] text-secondary font-medium">In Process</span>
+</div>
+<!-- Step 4 Pending -->
+<div class="flex flex-col items-center opacity-50">
+<div class="w-7 h-7 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-xs">4</div>
+<span class="font-label-sm text-[11px] font-medium text-on-surface-variant mt-1">Dispatched</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Pending</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- VERIFICATION & AUTHENTICITY BLOCK                                         -->
+<!-- ========================================================================= -->
+<section class="py-6 px-4 max-w-5xl mx-auto" id="verify">
+<div class="bg-surface-container-lowest border-2 border-secondary/40 rounded-xl p-6 relative overflow-hidden shadow-sm">
+<div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-secondary-fixed/20 to-transparent pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 gold-seal-border">
+<span class="material-symbols-outlined text-[32px]">verified</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Third-Party &amp; Employer Verification</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">Academic Credential Authentication</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-xl">
+              Are you an employer, embassy, or graduate school evaluating a Catholic University of Ghana certificate or transcript? Use our cryptographic verification code engine to confirm legitimacy within seconds.
+            </p>
+</div>
+</div>
+<button class="px-5 py-3 border-1.5 border-secondary text-secondary hover:bg-secondary-fixed/30 font-title-sm text-title-sm rounded font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+<span>Verify Document Hash</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- FAQ ACCORDION SECTION                                                     -->
+<!-- ========================================================================= -->
+<section class="py-8 px-4 max-w-5xl mx-auto" id="faq">
+<div class="mb-6">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Frequently Asked Questions</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mt-0.5">Registry Guidance &amp; Policies</h2>
+</div>
+<div class="space-y-3">
+<!-- FAQ 1 -->
+<details class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 group open:border-primary/50 transition-colors">
+<summary class="font-title-sm text-title-sm font-bold text-on-surface flex items-center justify-between cursor-pointer list-none">
+<span>How long does it take for transcripts to be processed?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 pt-2.5 border-t border-surface-container">
+          Standard processing timeframe is 3 to 5 business days for alumni graduating after 2012. For archived historical records prior to 2012, verification takes 5 to 7 business days as physical archives at the Fiapre registry are reconciled. Expedited fast-track options are available during checkout.
+        </p>
+</details>
+<!-- FAQ 2 -->
+<details class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 group open:border-primary/50 transition-colors">
+<summary class="font-title-sm text-title-sm font-bold text-on-surface flex items-center justify-between cursor-pointer list-none">
+<span>Do I need my student portal password to request documents?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 pt-2.5 border-t border-surface-container">
+          No. The ASRVS portal was purposely created as an open-access authenticated system. You only need your Index Number or Registration Number, programme title, and personal contact telephone/email. The registry authenticates your records internally.
+        </p>
+</details>
+<!-- FAQ 3 -->
+<details class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 group open:border-primary/50 transition-colors">
+<summary class="font-title-sm text-title-sm font-bold text-on-surface flex items-center justify-between cursor-pointer list-none">
+<span>Can I have my transcript sent directly to WES or an international embassy?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 pt-2.5 border-t border-surface-container">
+          Yes. When selecting dispatch, choose "Secure Institutional Email" or "DHL International". You will be prompted to enter your World Education Services (WES) reference number, CAS reference, or the recipient university's designated electronic admissions mailbox.
+        </p>
+</details>
+<!-- FAQ 4 -->
+<details class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 group open:border-primary/50 transition-colors">
+<summary class="font-title-sm text-title-sm font-bold text-on-surface flex items-center justify-between cursor-pointer list-none">
+<span>What mobile payment methods are accepted?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 pt-2.5 border-t border-surface-container">
+          We accept all Ghana mobile money networks (MTN MoMo, Telecel Cash, and AT Money) as well as locally issued and international Visa/Mastercard debit and credit cards through the Bank of Ghana approved payment gateway.
+        </p>
+</details>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- OFFICIAL FIAPRE REGISTRY CONTACT & OPERATING HOURS                       -->
+<!-- ========================================================================= -->
+<section class="py-8 px-4 max-w-5xl mx-auto" id="registry">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 sm:p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary">Academic Affairs Registry</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4">
+            Catholic University of Ghana<br/>
+            Fiapre - Sunyani, Bono Region, Ghana<br/>
+            P.O. Box 363, Sunyani
+          </p>
+<div class="space-y-2 text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">call</span>
+<span>Registry Line: +233 (0)3520 94658 / +233 (0)3520 94657</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">mail</span>
+<span>Email: registry@cug.edu.gh / academic@cug.edu.gh</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
+<span>Accreditation: Ghana Tertiary Education Commission (GTEC)</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-lg border border-outline-variant/60 flex flex-col justify-between">
+<div>
+<h4 class="font-title-sm text-title-sm font-bold text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">schedule</span>
+              Operating Hours (In-Person Registry)
+            </h4>
+<ul class="space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex justify-between">
+<span>Monday – Thursday:</span>
+<span class="font-semibold text-on-surface">8:30 AM – 4:30 PM</span>
+</li>
+<li class="flex justify-between">
+<span>Friday:</span>
+<span class="font-semibold text-on-surface">8:30 AM – 3:30 PM</span>
+</li>
+<li class="flex justify-between">
+<span>Weekends &amp; Public Holidays:</span>
+<span class="text-error font-medium">Closed</span>
+</li>
+</ul>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/60 text-[11px] text-on-surface-variant leading-relaxed">
+<strong>Confidentiality Notice:</strong> All student academic records are handled under strict provisions of the CUG Statutes and Ghana Data Protection Act (Act 843). No transcript or certificate will be released to unauthorized third parties without documented authorization.
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- FOOTER                                                                    -->
+<!-- ========================================================================= -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-8 px-4 mt-8">
+<div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container text-white flex items-center justify-center font-bold text-xs">
+          CUG
+        </div>
+<div class="text-left">
+<p class="font-title-sm text-title-sm font-bold text-primary">Catholic University of Ghana</p>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Academic Services Request &amp; Verification System (ASRVS)</p>
+</div>
+</div>
+<div class="font-body-sm text-[12px] text-on-surface-variant">
+        © 2025 Catholic University of Ghana. All rights reserved.
+      </div>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- BOTTOM NAVIGATION BAR (Shared Components: BottomNavBar)                  -->
+<!-- Mobile docked shell (md:hidden as mandated by hierarchy)                  -->
+<!-- ========================================================================= -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 bg-surface-container-lowest dark:bg-inverse-surface shadow-md">
+<!-- Tab 1: Requests -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high hover:text-on-surface active:scale-95 transition-all" href="#services">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-sm text-label-sm mt-0.5">Requests</span>
+</a>
+<!-- Tab 2: New Order (Active primary workflow) -->
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-lg px-3 py-1.5 active:scale-95 transition-all shadow-sm" href="#request-wizard">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span class="font-label-sm text-label-sm mt-0.5">New Order</span>
+</a>
+<!-- Tab 3: Verify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high hover:text-on-surface active:scale-95 transition-all" href="#verify">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+<span class="font-label-sm text-label-sm mt-0.5">Verify</span>
+</a>
+<!-- Tab 4: Track -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high hover:text-on-surface active:scale-95 transition-all" href="#track-status">
+<span class="material-symbols-outlined text-[20px]">timeline</span>
+<span class="font-label-sm text-label-sm mt-0.5">Track</span>
+</a>
+</nav>
+<!-- ========================================================================= -->
+<!-- LIGHTWEIGHT INTERACTION JAVASCRIPT                                        -->
+<!-- ========================================================================= -->
+<script>
+    // Navigation Drawer Toggle Logic
+    const openBtn = document.getElementById('open-drawer-btn');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const drawer = document.getElementById('nav-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    function openDrawer() {
+      drawer.classList.remove('-translate-x-full');
+      backdrop.classList.remove('hidden');
+      setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.add('-translate-x-full');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+
+    // Close drawer when clicking any link within it
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+  </script>
+</body></html>

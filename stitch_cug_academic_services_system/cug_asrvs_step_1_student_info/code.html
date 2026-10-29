@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUG ASRVS - Step 1: Student Information</title>
+<!-- Google Fonts: Newsreader & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f9f9ff",
+            "primary-fixed-dim": "#ffb2bc",
+            "secondary": "#775a00",
+            "on-tertiary-fixed-variant": "#3a485c",
+            "on-background": "#111c2d",
+            "outline-variant": "#dac0c2",
+            "inverse-primary": "#ffb2bc",
+            "on-secondary-fixed-variant": "#5a4300",
+            "on-primary-container": "#ee8495",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#172538",
+            "on-primary-fixed-variant": "#7c2a3b",
+            "on-surface": "#111c2d",
+            "primary": "#4e051a",
+            "tertiary-container": "#2d3b4f",
+            "tertiary-fixed-dim": "#b9c7e0",
+            "surface": "#f9f9ff",
+            "error": "#ba1a1a",
+            "secondary-container": "#fece57",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f0f3ff",
+            "surface-container": "#e7eeff",
+            "on-secondary-fixed": "#251a00",
+            "outline": "#877274",
+            "on-primary-fixed": "#400013",
+            "on-secondary-container": "#735700",
+            "on-error": "#ffffff",
+            "surface-variant": "#d8e3fb",
+            "surface-container-highest": "#d8e3fb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#dee8ff",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#0d1c2f",
+            "surface-dim": "#cfdaf2",
+            "primary-container": "#6b1d2f",
+            "inverse-surface": "#263143",
+            "secondary-fixed": "#ffdf98",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#544244",
+            "on-tertiary-container": "#97a5bd",
+            "background": "#f9f9ff",
+            "primary-fixed": "#ffd9dd",
+            "tertiary-fixed": "#d5e3fd",
+            "surface-tint": "#9a4152",
+            "inverse-on-surface": "#ecf1ff",
+            "secondary-fixed-dim": "#eec14b",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Newsreader", "serif"],
+            "label-sm": ["Public Sans", "sans-serif"],
+            "headline-lg-mobile": ["Newsreader", "serif"],
+            "title-md": ["Public Sans", "sans-serif"],
+            "body-md": ["Public Sans", "sans-serif"],
+            "body-lg": ["Public Sans", "sans-serif"],
+            "display-lg-mobile": ["Newsreader", "serif"],
+            "title-lg": ["Public Sans", "sans-serif"],
+            "headline-lg": ["Newsreader", "serif"],
+            "label-lg": ["Public Sans", "sans-serif"],
+            "body-sm": ["Public Sans", "sans-serif"],
+            "headline-sm": ["Newsreader", "serif"],
+            "display-lg": ["Newsreader", "serif"],
+            "label-md": ["Public Sans", "sans-serif"],
+            "title-sm": ["Public Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen antialiased flex flex-col font-body-md text-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar (From Shared Components) -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex items-center gap-3">
+<button aria-label="Open Navigation Menu" class="p-2 -ml-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-headline-md font-bold text-title-md">
+          C
+        </div>
+<div>
+<span class="text-title-lg font-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary leading-none block">CUG ASRVS</span>
+<span class="text-label-sm font-label-sm text-outline block leading-none mt-0.5">Registry Gateway</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="flex items-center gap-1 px-2.5 py-1 bg-surface-container-low rounded-lg border border-outline-variant/60">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="verified_user">verified_user</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">Official Portal</span>
+</div>
+</div>
+</header>
+<!-- Main Multi-step Application Wizard Canvas -->
+<main class="flex-1 w-full max-w-xl mx-auto px-4 pt-3 pb-32">
+<!-- Wizard Progress Stepper -->
+<section class="bg-surface-container-lowest rounded-lg p-4 mb-4 shadow-sm border border-outline-variant/50">
+<div class="flex items-center justify-between relative">
+<!-- Connecting Track Lines -->
+<div class="absolute left-6 right-6 top-4 h-[2px] bg-surface-container -z-0"></div>
+<div class="absolute left-6 w-1/3 top-4 h-[2px] bg-secondary-container -z-0"></div>
+<!-- Step 1: Active -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-title-sm font-bold ring-2 ring-offset-2 ring-secondary shadow-sm">
+            1
+          </div>
+<span class="text-label-sm font-label-sm font-bold text-primary mt-1.5 text-center">Student Info</span>
+<span class="text-[9px] uppercase tracking-wider text-secondary font-bold">Active</span>
+</div>
+<!-- Step 2: Pending -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-title-sm">
+            2
+          </div>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-1.5 text-center">Services &amp; Delivery</span>
+<span class="text-[9px] uppercase tracking-wider text-outline font-medium">Pending</span>
+</div>
+<!-- Step 3: Pending -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-title-sm">
+            3
+          </div>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-1.5 text-center">Review &amp; Pay</span>
+<span class="text-[9px] uppercase tracking-wider text-outline font-medium">Pending</span>
+</div>
+</div>
+</section>
+<!-- Header & Subtitle Block -->
+<section class="mb-5">
+<div class="flex items-center gap-1.5 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-sm" data-icon="account_balance">account_balance</span>
+<span>Fiapre Academic Registry • Records Search</span>
+</div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary tracking-tight">
+        Step 1: Student Verification &amp; Details
+      </h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1.5">
+        Please provide your academic records information exactly as registered with the Catholic University of Ghana.
+      </p>
+</section>
+<!-- Student Registration Form -->
+<form class="space-y-5" onsubmit="event.preventDefault();">
+<!-- Identification Card -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/60 space-y-4">
+<div class="border-b border-outline-variant/40 pb-2">
+<h2 class="text-title-md font-title-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="badge">badge</span>
+            Primary Identification
+          </h2>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Must match institutional archives</p>
+</div>
+<!-- Field 1: Index Number -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="text-label-md font-label-md text-on-surface" for="indexNumber">
+              Student Index Number <span class="text-primary font-bold">*</span>
+</label>
+<span class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Required</span>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="pin">pin</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all font-mono" id="indexNumber" placeholder="e.g. CUG/BIT/20/004" required="" type="text"/>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="help">help</span>
+            Located on your student ID or admission letter
+          </p>
+</div>
+<!-- Field 2: Full Legal Name -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="legalName">
+            Full Legal Name (Surname, First Name, Other Names) <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="person">person</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="legalName" placeholder="e.g. Mensah, Kwame Emmanuel" required="" type="text"/>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-1">Order will be printed exactly as registered on graduation rolls.</p>
+</div>
+</div>
+<!-- Contact Information Card -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/60 space-y-4">
+<div class="border-b border-outline-variant/40 pb-2">
+<h2 class="text-title-md font-title-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="call">call</span>
+            Contact &amp; Notification Channels
+          </h2>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Used for dispatch tracking alerts and confirmation codes</p>
+</div>
+<!-- Field 3: Mobile Phone Number -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="mobilePhone">
+            Mobile Phone Number (Ghana format) <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="phone_iphone">phone_iphone</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all font-mono" id="mobilePhone" placeholder="+233 XX XXX XXXX" required="" type="tel"/>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-1">SMS updates regarding transcript clearance will be dispatched here.</p>
+</div>
+<!-- Field 4: Alternate Phone Number -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="text-label-md font-label-md text-on-surface" for="altPhone">
+              Alternate Phone Number
+            </label>
+<span class="text-label-sm font-label-sm text-outline">Optional</span>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="contact_phone">contact_phone</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all font-mono" id="altPhone" placeholder="+233 XX XXX XXXX" type="tel"/>
+</div>
+</div>
+<!-- Field 5: Personal Email Address -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="emailAddress">
+            Personal Email Address <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="mail">mail</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="emailAddress" placeholder="applicant@example.com" required="" type="email"/>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-1">For order receipts, PDF payment vouchers, and digital status updates.</p>
+</div>
+</div>
+<!-- Academic Faculty & Programme Card -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/60 space-y-4">
+<div class="border-b border-outline-variant/40 pb-2">
+<h2 class="text-title-md font-title-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="school">school</span>
+            Academic Affiliation
+          </h2>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Faculty division and programme pursued</p>
+</div>
+<!-- Field 6: Faculty / School Selector -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="facultySelect">
+            Faculty / School <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-10 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 appearance-none transition-all" id="facultySelect" required="">
+<option disabled="" selected="" value="">Select Faculty / School...</option>
+<option value="computing">Faculty of Computing</option>
+<option value="business">Faculty of Business Administration</option>
+<option value="health">Faculty of Health Sciences</option>
+<option value="education">Faculty of Education</option>
+<option value="religions">Faculty of Religions and Social Sciences</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Field 7: Programme of Study -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="programmeStudy">
+            Programme of Study <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="programmeStudy" placeholder="e.g. BSc. Information Technology, BSc. Nursing, BBA Accounting" required="" type="text"/>
+</div>
+</div>
+<!-- Field 8: Current Student Status Toggle & Conditional Graduation Year -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-2">
+            Current Student Status <span class="text-primary font-bold">*</span>
+</label>
+<div class="grid grid-cols-2 gap-2 p-1 bg-surface-container rounded-lg" role="radiogroup">
+<label class="flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all bg-surface-container-lowest shadow-sm text-primary font-semibold text-body-sm font-body-sm border border-outline-variant/60" id="label-continuing">
+<input checked="" class="sr-only" name="student_status" onchange="toggleGradYear(false)" type="radio" value="continuing"/>
+<span class="material-symbols-outlined text-sm" data-icon="school">school</span>
+<span>Continuing Student</span>
+</label>
+<label class="flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all text-on-surface-variant hover:text-on-surface text-body-sm font-body-sm" id="label-alumnus">
+<input class="sr-only" name="student_status" onchange="toggleGradYear(true)" type="radio" value="alumnus"/>
+<span class="material-symbols-outlined text-sm" data-icon="workspace_premium">workspace_premium</span>
+<span>Completed / Alumnus</span>
+</label>
+</div>
+<!-- Conditional Graduation Year field (hidden by default, toggled via JS) -->
+<div class="mt-3 hidden p-3 bg-surface-container-low rounded-lg border border-outline-variant/50 transition-all" id="gradYearContainer">
+<label class="text-label-md font-label-md text-primary block mb-1" for="gradYear">
+              Completion / Graduation Year <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_month">calendar_month</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest rounded border border-outline-variant text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-mono" id="gradYear" max="2026" min="2003" placeholder="e.g. 2023" type="number"/>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-1">Indicate the year your congregation was held or degree conferred.</p>
+</div>
+</div>
+</div>
+<!-- Residential & Dispatch Address Card -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/60 space-y-4">
+<div class="border-b border-outline-variant/40 pb-2">
+<h2 class="text-title-md font-title-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="home_pin">home_pin</span>
+            Residential Address Details
+          </h2>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Default mailing destination for official registry notices</p>
+</div>
+<!-- Field 9a: Country of Residence -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="countryResidence">
+            Country of Residence <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-10 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 appearance-none" id="countryResidence" required="">
+<option selected="" value="Ghana">Ghana</option>
+<option value="Nigeria">Nigeria</option>
+<option value="Ivory Coast">Côte d'Ivoire</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States">United States</option>
+<option value="Canada">Canada</option>
+<option value="Other">Other International Country</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Field 9b: Region of Residence -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="regionResidence">
+            Region of Residence <span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3 pr-10 py-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 appearance-none" id="regionResidence" required="">
+<option disabled="" selected="" value="">Select Administrative Region...</option>
+<option value="Ahafo">Ahafo Region</option>
+<option value="Ashanti">Ashanti Region</option>
+<option selected="" value="Bono">Bono Region (Sunyani)</option>
+<option value="Bono East">Bono East Region</option>
+<option value="Central">Central Region</option>
+<option value="Eastern">Eastern Region</option>
+<option value="Greater Accra">Greater Accra Region</option>
+<option value="Northern">Northern Region</option>
+<option value="North East">North East Region</option>
+<option value="Oti">Oti Region</option>
+<option value="Savannah">Savannah Region</option>
+<option value="Upper East">Upper East Region</option>
+<option value="Upper West">Upper West Region</option>
+<option value="Volta">Volta Region</option>
+<option value="Western">Western Region</option>
+<option value="Western North">Western North Region</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Field 9c: Permanent Postal / Physical Address -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-1" for="permanentAddress">
+            Permanent Postal / Physical Address <span class="text-primary font-bold">*</span>
+</label>
+<textarea class="w-full px-3 py-2 bg-surface-container-lowest rounded-lg border border-outline-variant text-on-surface placeholder:text-outline-variant/80 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-none" id="permanentAddress" placeholder="e.g., P.O. Box 363, Sunyani / GPS Address: BS-0142-2345" required="" rows="2"></textarea>
+</div>
+</div>
+<!-- Institutional Notice Box -->
+<div class="p-3.5 bg-surface-container-low rounded-lg border-l-4 border-l-secondary border border-outline-variant/50 flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-xl mt-0.5 shrink-0" data-icon="policy">policy</span>
+<div class="space-y-0.5">
+<p class="text-label-md font-label-md text-primary font-bold">Institutional Registry Notice</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+            Your details will be cross-checked against university registry archives for fee clearance and records validation.
+          </p>
+</div>
+</div>
+</form>
+</main>
+<!-- Sticky Mobile Action Dock (Sub-journey focused departure) -->
+<footer class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md shadow-lg p-3">
+<div class="max-w-xl mx-auto flex items-center gap-3">
+<!-- Cancel / Back Button -->
+<button class="w-1/3 py-2.5 px-3 rounded-lg border border-primary-container text-primary-container font-label-lg font-label-lg hover:bg-primary-container/5 transition-all text-center" type="button">
+        Cancel / Back to Home
+      </button>
+<!-- Primary Burgundy Step 2 CTA -->
+<button class="flex-1 py-2.5 px-4 rounded-lg bg-primary-container text-on-primary font-label-lg font-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary active:scale-[0.98] transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2" type="button">
+<span>Continue to Services (Step 2)</span>
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</footer>
+<!-- Segmented Toggle Script -->
+<script>
+    function toggleGradYear(isAlumnus) {
+      const gradContainer = document.getElementById('gradYearContainer');
+      const labelContinuing = document.getElementById('label-continuing');
+      const labelAlumnus = document.getElementById('label-alumnus');
+      const gradYearInput = document.getElementById('gradYear');
+
+      if (isAlumnus) {
+        gradContainer.classList.remove('hidden');
+        gradYearInput.required = true;
+        
+        // Active Styling for Alumnus
+        labelAlumnus.className = "flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all bg-surface-container-lowest shadow-sm text-primary font-semibold text-body-sm font-body-sm border border-outline-variant/60";
+        labelContinuing.className = "flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all text-on-surface-variant hover:text-on-surface text-body-sm font-body-sm";
+      } else {
+        gradContainer.classList.add('hidden');
+        gradYearInput.required = false;
+        
+        // Active Styling for Continuing
+        labelContinuing.className = "flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all bg-surface-container-lowest shadow-sm text-primary font-semibold text-body-sm font-body-sm border border-outline-variant/60";
+        labelAlumnus.className = "flex items-center justify-center gap-2 py-2 px-3 rounded cursor-pointer text-center transition-all text-on-surface-variant hover:text-on-surface text-body-sm font-body-sm";
+      }
+    }
+  </script>
+</body></html>

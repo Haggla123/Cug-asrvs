@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUG ASRVS - Request Services &amp; Delivery</title>
+<!-- Google Fonts: Newsreader (headlines) & Public Sans (body/labels) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f9f9ff",
+            "primary-fixed-dim": "#ffb2bc",
+            "secondary": "#775a00",
+            "on-tertiary-fixed-variant": "#3a485c",
+            "on-background": "#111c2d",
+            "outline-variant": "#dac0c2",
+            "inverse-primary": "#ffb2bc",
+            "on-secondary-fixed-variant": "#5a4300",
+            "on-primary-container": "#ee8495",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#172538",
+            "on-primary-fixed-variant": "#7c2a3b",
+            "on-surface": "#111c2d",
+            "primary": "#4e051a",
+            "tertiary-container": "#2d3b4f",
+            "tertiary-fixed-dim": "#b9c7e0",
+            "surface": "#f9f9ff",
+            "error": "#ba1a1a",
+            "secondary-container": "#fece57",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f0f3ff",
+            "surface-container": "#e7eeff",
+            "on-secondary-fixed": "#251a00",
+            "outline": "#877274",
+            "on-primary-fixed": "#400013",
+            "on-secondary-container": "#735700",
+            "on-error": "#ffffff",
+            "surface-variant": "#d8e3fb",
+            "surface-container-highest": "#d8e3fb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#dee8ff",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#0d1c2f",
+            "surface-dim": "#cfdaf2",
+            "primary-container": "#6b1d2f",
+            "inverse-surface": "#263143",
+            "secondary-fixed": "#ffdf98",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#544244",
+            "on-tertiary-container": "#97a5bd",
+            "background": "#f9f9ff",
+            "primary-fixed": "#ffd9dd",
+            "tertiary-fixed": "#d5e3fd",
+            "surface-tint": "#9a4152",
+            "inverse-on-surface": "#ecf1ff",
+            "secondary-fixed-dim": "#eec14b",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Newsreader"],
+            "label-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Newsreader"],
+            "title-md": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "display-lg-mobile": ["Newsreader"],
+            "title-lg": ["Public Sans"],
+            "headline-lg": ["Newsreader"],
+            "label-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "headline-sm": ["Newsreader"],
+            "display-lg": ["Newsreader"],
+            "label-md": ["Public Sans"],
+            "title-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md pb-32">
+<!-- TopAppBar Component (from Shared Components JSON) -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none sticky top-0 z-50 flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<button aria-label="Open Navigation Drawer" class="p-2 -ml-2 rounded-lg text-primary dark:text-inverse-primary hover:bg-surface-container-low focus:outline-none" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
+<div class="flex flex-col">
+<span class="text-title-lg font-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary">CUG ASRVS</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-medium tracking-wide">Fiapre Registry Portal</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-semibold">SSL 256-Bit</span>
+</div>
+</div>
+</header>
+<!-- Main Administrative Flow Canvas -->
+<main class="w-full max-w-xl mx-auto px-4 pt-4 flex-grow">
+<!-- Institutional Context Breadcrumb & Order Tag -->
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/50 mb-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="account_balance">account_balance</span>
+<span>Catholic University of Ghana</span>
+</div>
+<span class="font-mono text-label-sm font-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">ORD-2026-8941</span>
+</div>
+<!-- Wizard Progress Stepper -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 mb-6 shadow-sm">
+<div class="flex items-center justify-between relative">
+<!-- Connecting Line Base -->
+<div class="absolute top-4 left-6 right-6 h-0.5 bg-outline-variant/60 -z-0"></div>
+<div class="absolute top-4 left-6 w-1/2 h-0.5 bg-primary -z-0"></div>
+<!-- Step 1: Completed -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-base font-bold" data-icon="check">check</span>
+</div>
+<span class="mt-2 text-label-sm font-label-sm font-medium text-emerald-800">Student Info</span>
+<span class="text-[10px] text-emerald-700 font-bold uppercase tracking-wider">Completed</span>
+</div>
+<!-- Step 2: Active (Burgundy & Gold) -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white ring-4 ring-secondary-container flex items-center justify-center shadow-md">
+<span class="text-label-sm font-label-sm font-bold">2</span>
+</div>
+<span class="mt-2 text-label-sm font-label-sm font-bold text-primary">Services &amp; Delivery</span>
+<span class="text-[10px] text-secondary font-bold uppercase tracking-wider">Active</span>
+</div>
+<!-- Step 3: Pending -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant flex items-center justify-center">
+<span class="text-label-sm font-label-sm font-semibold">3</span>
+</div>
+<span class="mt-2 text-label-sm font-label-sm font-medium text-on-surface-variant">Review &amp; Pay</span>
+<span class="text-[10px] text-outline font-medium uppercase tracking-wider">Pending</span>
+</div>
+</div>
+</section>
+<!-- SECTION A: MULTI-SERVICE SELECTION -->
+<section class="space-y-4 mb-8">
+<div class="flex items-end justify-between">
+<div>
+<span class="text-label-sm font-label-sm text-secondary font-bold uppercase tracking-wider">Section A</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Select Academic Documents</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">3 Selected</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant -mt-2">
+        Choose official documents issued by the Academic Services Registry. You can request multiple copies of each.
+      </p>
+<!-- CARD A: Official Academic Transcript (CHECKED) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-sm relative overflow-hidden transition-all">
+<div class="absolute top-0 right-0 w-12 h-12 overflow-hidden pointer-events-none">
+<div class="bg-primary text-white text-[9px] font-bold text-center py-0.5 absolute w-20 rotate-45 top-2 -right-5 uppercase">Selected</div>
+</div>
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 h-5 w-5 rounded-lg border-outline text-primary focus:ring-secondary cursor-pointer" id="service-transcript" type="checkbox"/>
+<div class="flex-1 pr-6">
+<div class="flex items-center justify-between">
+<label class="text-title-sm font-title-sm text-on-surface cursor-pointer" for="service-transcript">Official Academic Transcript</label>
+</div>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Base: GHS 50.00 / copy</span>
+<span class="text-[11px] font-medium text-emerald-800 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Seal Included</span>
+</div>
+</div>
+</div>
+<!-- Options Cluster for Transcript -->
+<div class="mt-4 pt-3 border-t border-outline-variant/60 grid grid-cols-1 sm:grid-cols-2 gap-3 bg-surface-container-low p-3 rounded-lg">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Academic Level</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg text-body-sm font-body-sm px-2.5 py-1.5 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary">
+<option selected="">Bachelor's Degree</option>
+<option>Master's Degree</option>
+<option>Diploma</option>
+</select>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Number of Copies</label>
+<div class="flex items-center justify-between">
+<div class="flex items-center border border-outline-variant bg-surface-container-lowest rounded-lg overflow-hidden">
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">-</button>
+<span class="w-8 text-center text-title-sm font-title-sm text-on-surface">2</span>
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">+</button>
+</div>
+<div class="text-right">
+<span class="block text-[10px] text-on-surface-variant uppercase font-medium">Subtotal</span>
+<span class="text-title-sm font-title-sm text-primary font-bold">GHS 100.00</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD B: English Proficiency Letter (CHECKED) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-sm relative overflow-hidden transition-all">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 h-5 w-5 rounded-lg border-outline text-primary focus:ring-secondary cursor-pointer" id="service-english" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<label class="text-title-sm font-title-sm text-on-surface cursor-pointer" for="service-english">English Proficiency Letter</label>
+<span class="text-label-sm font-label-sm font-bold text-primary">GHS 40.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Certifies English as the primary medium of university instruction.</p>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-outline-variant/60 flex items-center justify-between bg-surface-container-low p-3 rounded-lg">
+<span class="text-label-sm font-label-sm text-on-surface-variant font-medium">Number of Copies</span>
+<div class="flex items-center gap-4">
+<div class="flex items-center border border-outline-variant bg-surface-container-lowest rounded-lg overflow-hidden">
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">-</button>
+<span class="w-8 text-center text-title-sm font-title-sm text-on-surface">1</span>
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">+</button>
+</div>
+<div class="text-right min-w-[70px]">
+<span class="block text-[10px] text-on-surface-variant uppercase font-medium">Subtotal</span>
+<span class="text-title-sm font-title-sm text-primary font-bold">GHS 40.00</span>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD C: Attestation / Introductory Letter (CHECKED) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-sm relative overflow-hidden transition-all">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 h-5 w-5 rounded-lg border-outline text-primary focus:ring-secondary cursor-pointer" id="service-attestation" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<label class="text-title-sm font-title-sm text-on-surface cursor-pointer" for="service-attestation">Attestation / Introductory Letter</label>
+<span class="text-label-sm font-label-sm font-bold text-primary">GHS 35.00 / copy</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Confirms current enrollment status or academic completion.</p>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-outline-variant/60 space-y-3 bg-surface-container-low p-3 rounded-lg">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Declared Purpose</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg text-body-sm font-body-sm px-2.5 py-1.5 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Visa / Embassy Application</option>
+<option selected="">Internship / Employment</option>
+<option>Banking &amp; Financial Account</option>
+<option>National Service Scheme (NSS)</option>
+</select>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant font-medium">Number of Copies</span>
+<div class="flex items-center gap-4">
+<div class="flex items-center border border-outline-variant bg-surface-container-lowest rounded-lg overflow-hidden">
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">-</button>
+<span class="w-8 text-center text-title-sm font-title-sm text-on-surface">1</span>
+<button class="w-9 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors text-base font-bold" type="button">+</button>
+</div>
+<div class="text-right min-w-[70px]">
+<span class="block text-[10px] text-on-surface-variant uppercase font-medium">Subtotal</span>
+<span class="text-title-sm font-title-sm text-primary font-bold">GHS 35.00</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD D: Certified True Copy of Certificate (UNCHECKED) -->
+<article class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-4 shadow-sm opacity-90 hover:opacity-100 transition-opacity">
+<div class="flex items-start gap-3">
+<input class="mt-1 h-5 w-5 rounded-lg border-outline text-primary focus:ring-secondary cursor-pointer" id="service-cert" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<label class="text-title-sm font-title-sm text-on-surface cursor-pointer" for="service-cert">Certified True Copy of Certificate</label>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold">GHS 30.00 / copy</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">High-resolution registrar embossment on existing degree parchment.</p>
+</div>
+</div>
+<div class="mt-3 pt-2 text-on-surface-variant/80 border-t border-outline-variant/40 flex items-center gap-2 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-base" data-icon="upload_file">upload_file</span>
+<span>Requires clear scanned PDF/JPG of original degree certificate</span>
+</div>
+</article>
+<!-- CARD E: Academic Recommendation Letter (UNCHECKED) -->
+<article class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-4 shadow-sm opacity-90 hover:opacity-100 transition-opacity">
+<div class="flex items-start gap-3">
+<input class="mt-1 h-5 w-5 rounded-lg border-outline text-primary focus:ring-secondary cursor-pointer" id="service-rec" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<label class="text-title-sm font-title-sm text-on-surface cursor-pointer" for="service-rec">Academic Recommendation Letter</label>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold">GHS 40.00 / copy</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Issued under signature of Faculty Dean or assigned Senior Lecturer.</p>
+</div>
+</div>
+<div class="mt-3 pt-2 text-on-surface-variant/80 border-t border-outline-variant/40 flex items-center gap-2 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-base" data-icon="school">school</span>
+<span>Requires Dean / Departmental Lecturer approval clearance</span>
+</div>
+</article>
+</section>
+<!-- SECTION B: PRIMARY REASON FOR ORDERING -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 mb-8 shadow-sm">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-label-sm font-label-sm text-secondary font-bold uppercase tracking-wider">Section B</span>
+<span class="text-label-sm font-label-sm text-primary font-semibold">* Required</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-primary mb-3">Primary Reason for Ordering</h2>
+<div class="grid grid-cols-2 gap-2.5">
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer">
+<input checked="" class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm font-semibold text-primary">For Employment</span>
+</label>
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm text-on-surface">For Admission</span>
+</label>
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm text-on-surface">For Scholarship</span>
+</label>
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm text-on-surface">For an Organization</span>
+</label>
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm text-on-surface">For Myself</span>
+</label>
+<label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-secondary" name="order_reason" type="radio"/>
+<span class="text-body-sm font-body-sm text-on-surface">Other</span>
+</label>
+</div>
+</section>
+<!-- SECTION C: RECIPIENT CONFIGURATION -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 mb-8 shadow-sm">
+<div class="mb-3">
+<span class="text-label-sm font-label-sm text-secondary font-bold uppercase tracking-wider">Section C</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Recipient Configuration</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Specify the official institutional entity receiving the documents.</p>
+</div>
+<div class="space-y-3.5">
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">Recipient Classification</label>
+<div class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-base" data-icon="domain">domain</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Send to an Organization</span>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+            Organization Name <span class="text-primary">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline rounded-lg text-body-md font-body-md px-3 py-2 text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20" type="text" value="Ghana Audit Service"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+            Attention Person / Office <span class="text-primary">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline rounded-lg text-body-md font-body-md px-3 py-2 text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20" type="text" value="Director of Human Resources"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+            External Reference / File Number <span class="text-outline text-label-sm">(Optional)</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md px-3 py-2 text-on-surface font-mono text-sm focus:border-primary focus:ring-2 focus:ring-primary/20" type="text" value="GAS/REC/2026/089"/>
+</div>
+</div>
+</section>
+<!-- SECTION D: DELIVERY METHOD -->
+<section class="space-y-3 mb-8">
+<div>
+<span class="text-label-sm font-label-sm text-secondary font-bold uppercase tracking-wider">Section D</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Delivery Method</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Select how the sealed physical or certified digital records will be dispatched.</p>
+</div>
+<!-- Option 1: Self-Pickup -->
+<label class="flex items-start gap-3 p-3.5 bg-surface-container-lowest border border-outline-variant/70 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-secondary" name="delivery_method" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-sm font-title-sm text-on-surface">Self-Pickup</span>
+<span class="text-label-sm font-label-sm text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">GHS 0.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Fiapre-Sunyani Campus, Registry Room 104 (Mon-Fri, 9:00 AM - 4:00 PM).</p>
+</div>
+</label>
+<!-- Option 2: Authorized Proxy Pickup -->
+<label class="flex items-start gap-3 p-3.5 bg-surface-container-lowest border border-outline-variant/70 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-secondary" name="delivery_method" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-sm font-title-sm text-on-surface">Authorized Proxy Pickup</span>
+<span class="text-label-sm font-label-sm text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">GHS 0.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Requires verified Proxy Name, Ghana Card ID, and signed Authorization letter.</p>
+</div>
+</label>
+<!-- Option 3: Official Email Delivery -->
+<label class="flex items-start gap-3 p-3.5 bg-surface-container-lowest border border-outline-variant/70 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-secondary" name="delivery_method" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-sm font-title-sm text-on-surface">Email Delivery</span>
+<span class="text-label-sm font-label-sm text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">GHS 0.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Direct cryptographic PDF dispatch with registry digital stamp sent to institution inbox.</p>
+</div>
+</label>
+<!-- Option 4: Courier / Postal Delivery (SELECTED) -->
+<div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-sm">
+<label class="flex items-start gap-3 cursor-pointer">
+<input checked="" class="mt-1 h-4 w-4 text-primary focus:ring-secondary" name="delivery_method" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-title-sm font-title-sm text-primary font-bold">Courier / Postal Delivery</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="local_shipping">local_shipping</span>
+</div>
+<span class="text-title-sm font-title-sm text-primary font-bold">GHS 50.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Physical dispatch via tracked domestic express mail service.</p>
+</div>
+</label>
+<!-- Dispatch Details Sub-card -->
+<div class="mt-3.5 pt-3.5 border-t border-outline-variant/60 space-y-3 bg-surface-container-low p-3.5 rounded-lg">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant/40">
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold">Service Provider:</span>
+<span class="text-label-md font-label-md font-bold text-primary">Ghana Post EMS (Domestic)</span>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Postal / Delivery Address</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline rounded-lg text-body-sm font-body-sm p-2 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary" rows="2">Ministries Post Office, P.O. Box M.96, Accra, Greater Accra Region</textarea>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">GhanaPost GPS Digital Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-sm text-outline" data-icon="pin_drop">pin_drop</span>
+<input class="w-full pl-8 bg-surface-container-lowest border border-outline rounded-lg text-body-sm font-body-sm py-1.5 text-on-surface font-mono" type="text" value="GA-110-3452"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Recipient Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-sm text-outline" data-icon="phone">phone</span>
+<input class="w-full pl-8 bg-surface-container-lowest border border-outline rounded-lg text-body-sm font-body-sm py-1.5 text-on-surface font-mono" type="text" value="+233 24 412 3456"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Institutional Registry Stamp Seal Guarantee Banner -->
+<div class="border border-secondary/40 bg-secondary-container/15 rounded-xl p-3.5 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl mt-0.5" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div>
+<h3 class="text-title-sm font-title-sm text-on-secondary-container font-bold">Official Seal &amp; Holographic Guarantee</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+          All selected documents are physically embossed with the Catholic University of Ghana institutional coat of arms and cryptographic QR lookup matrix prior to courier dispatch.
+        </p>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Summary / Action Bar (Running Total) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest border-t border-outline-variant/60 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] p-3">
+<div class="max-w-xl mx-auto flex items-center justify-between gap-3">
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Estimated Fee (4 copies + EMS)</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-headline-sm font-headline-sm font-bold text-primary">GHS 225.00</span>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary-container text-on-primary hover:bg-primary px-5 py-3 rounded-lg font-title-sm text-title-sm font-bold shadow-md active:scale-95 transition-all" type="button">
+<span>Continue to Review</span>
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

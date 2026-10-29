@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUG ASRVS - Order Confirmation &amp; Live Request Tracking</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader and Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f9f9ff",
+            "primary-fixed-dim": "#ffb2bc",
+            "secondary": "#775a00",
+            "on-tertiary-fixed-variant": "#3a485c",
+            "on-background": "#111c2d",
+            "outline-variant": "#dac0c2",
+            "inverse-primary": "#ffb2bc",
+            "on-secondary-fixed-variant": "#5a4300",
+            "on-primary-container": "#ee8495",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#172538",
+            "on-primary-fixed-variant": "#7c2a3b",
+            "on-surface": "#111c2d",
+            "primary": "#4e051a",
+            "tertiary-container": "#2d3b4f",
+            "tertiary-fixed-dim": "#b9c7e0",
+            "surface": "#f9f9ff",
+            "error": "#ba1a1a",
+            "secondary-container": "#fece57",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f0f3ff",
+            "surface-container": "#e7eeff",
+            "on-secondary-fixed": "#251a00",
+            "outline": "#877274",
+            "on-primary-fixed": "#400013",
+            "on-secondary-container": "#735700",
+            "on-error": "#ffffff",
+            "surface-variant": "#d8e3fb",
+            "surface-container-highest": "#d8e3fb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#dee8ff",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#0d1c2f",
+            "surface-dim": "#cfdaf2",
+            "primary-container": "#6b1d2f",
+            "inverse-surface": "#263143",
+            "secondary-fixed": "#ffdf98",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#544244",
+            "on-tertiary-container": "#97a5bd",
+            "background": "#f9f9ff",
+            "primary-fixed": "#ffd9dd",
+            "tertiary-fixed": "#d5e3fd",
+            "surface-tint": "#9a4152",
+            "inverse-on-surface": "#ecf1ff",
+            "secondary-fixed-dim": "#eec14b",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Newsreader"],
+            "label-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Newsreader"],
+            "title-md": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "display-lg-mobile": ["Newsreader"],
+            "title-lg": ["Public Sans"],
+            "headline-lg": ["Newsreader"],
+            "label-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "headline-sm": ["Newsreader"],
+            "display-lg": ["Newsreader"],
+            "label-md": ["Public Sans"],
+            "title-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.04); }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md antialiased pb-24">
+<!-- TOP APP BAR (from Shared Components JSON: TopAppBar) -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex items-center gap-3">
+<button aria-label="Open Navigation Drawer" class="p-2 rounded-lg text-primary hover:bg-surface-container-low transition-colors" onclick="toggleSideDrawer()">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div>
+<span class="text-title-lg font-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary block">CUG ASRVS</span>
+<span class="text-label-sm font-label-sm text-secondary font-medium tracking-wide block -mt-1">Fiapre Registry</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm">shield</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold">Official Registry Portal</span>
+</div>
+<button aria-label="System Trust Certification" class="p-2 text-primary dark:text-inverse-primary rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+</div>
+</header>
+<!-- NAVIGATION DRAWER OVERLAY & COMPONENT (Shared Components JSON: NavigationDrawer) -->
+<div class="fixed inset-0 bg-on-background/40 z-50 backdrop-blur-xs hidden transition-opacity" id="drawerOverlay" onclick="toggleSideDrawer()"></div>
+<aside class="fixed inset-y-0 left-0 z-50 flex flex-col p-4 w-80 max-w-[85vw] bg-surface-container-lowest dark:bg-inverse-surface shadow-xl dark:shadow-none transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-outline-variant" id="navDrawer">
+<!-- Drawer Header -->
+<div class="pb-4 border-b border-outline-variant mb-4">
+<div class="flex items-center justify-between mb-3">
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold text-headline-sm shadow-sm">
+<span class="material-symbols-outlined">school</span>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-primary" onclick="toggleSideDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">Academic Services Registry</h3>
+<p class="text-body-md font-body-md text-on-surface">Catholic University of Ghana</p>
+<span class="text-label-md font-label-md text-secondary font-medium block mt-0.5">Sunyani - Fiapre Campus</span>
+</div>
+<!-- Drawer Navigation Links -->
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-tertiary-container rounded-lg" href="#applications">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="text-label-md font-label-md">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-tertiary-container rounded-lg" href="#verify">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-label-md font-label-md">Verify Certificate</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-lg font-semibold" href="#track">
+<span class="material-symbols-outlined">timeline</span>
+<span class="text-label-md font-label-md">Fee Schedule</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-tertiary-container rounded-lg" href="#registry">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-label-md font-label-md">Fiapre Registry Info</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-tertiary-container rounded-lg" href="#support">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="text-label-md font-label-md">Student Support</span>
+</a>
+</nav>
+<!-- Drawer Footer Badge -->
+<div class="pt-4 border-t border-outline-variant text-center">
+<p class="text-label-sm font-label-sm text-outline">ASRVS v3.4 Secure Architecture</p>
+<p class="text-label-sm font-label-sm text-secondary">Office of the Registrar © 2026</p>
+</div>
+</aside>
+<!-- MAIN VIEW CONTAINER -->
+<main class="w-full max-w-3xl mx-auto px-4 sm:px-6 pt-4 space-y-6">
+<!-- TAB / WORKFLOW TOGGLE SWITCHER -->
+<section class="bg-surface-container-low p-1.5 rounded-lg flex items-center shadow-xs">
+<button class="flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 bg-surface-container-lowest text-primary shadow-sm font-semibold transition-all" id="tabConfirmationBtn" onclick="switchView('confirmation')">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Confirmation</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 text-on-surface-variant hover:text-primary transition-all" id="tabTrackingBtn" onclick="switchView('tracking')">
+<span class="material-symbols-outlined text-sm">timeline</span>
+<span>Live Tracking</span>
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container"></span>
+</button>
+</section>
+<!-- ========================================== -->
+<!-- VIEW 1: ORDER CONFIRMATION & PAYMENT SUCCESS -->
+<!-- ========================================== -->
+<div class="space-y-6" id="viewConfirmation">
+<!-- Primary Success Card -->
+<article class="bg-surface-container-lowest rounded-xl p-5 sm:p-6 border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-36 h-36 bg-surface-container-low rounded-full pointer-events-none opacity-50"></div>
+<!-- Verified Header Banner -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-green-50 text-green-700 border border-green-200 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl font-bold">verified</span>
+</div>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-green-50 text-green-800 border border-green-200 text-label-sm font-label-sm font-semibold mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+              Payment Confirmed &amp; Settled
+            </div>
+<h1 class="text-headline-sm font-headline-sm sm:font-headline-md sm:text-headline-md font-bold text-on-surface text-primary leading-tight">
+              Your Academic Service Request Has Been Submitted
+            </h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+              Your request docket has been routed to the Registry Archive Desk, Fiapre Campus.
+            </p>
+</div>
+</div>
+<!-- Reference Identifier & Quick Copy Bar -->
+<div class="mt-5 p-3.5 bg-surface-container-low rounded-lg border border-outline-variant/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block">OFFICIAL TRACKING REFERENCE</span>
+<span class="font-mono text-title-md font-title-md font-bold text-primary tracking-wide" id="refCode">CUG-REQ-2026-8941</span>
+</div>
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest text-primary border border-outline-variant rounded-lg text-label-md font-label-md font-semibold hover:bg-surface-container hover:text-primary transition-all active:scale-98" onclick="copyReferenceCode()">
+<span class="material-symbols-outlined text-base" id="copyIcon">content_copy</span>
+<span id="copyText">Copy Reference</span>
+</button>
+</div>
+<!-- Request Details Ledger -->
+<div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-outline-variant/60">
+<div>
+<span class="text-label-sm font-label-sm text-outline block">STUDENT CANDIDATE</span>
+<p class="text-title-sm font-title-sm text-on-surface font-semibold">Emmanuel Kwabena Mensah</p>
+<p class="text-body-sm font-body-sm font-mono text-on-surface-variant">CUG/BIT/20/004</p>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-outline block">TRANSACTION RECORD</span>
+<p class="text-title-sm font-title-sm text-primary font-bold">GHS 225.00</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">MTN MoMo Confirmed • 28 Oct 2026</p>
+</div>
+</div>
+<!-- Ordered Services Section -->
+<div class="mt-5 pt-4 border-t border-outline-variant/60">
+<span class="text-label-sm font-label-sm text-outline block mb-2">SERVICES COMMISSIONED</span>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low/60 rounded-lg text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">school</span>
+<span class="font-medium text-on-surface">Official Academic Transcript</span>
+</div>
+<span class="font-mono text-label-md font-label-md font-semibold px-2 py-0.5 bg-surface-container-lowest rounded border border-outline-variant">2 Copies</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low/60 rounded-lg text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">translate</span>
+<span class="font-medium text-on-surface">English Language Proficiency Certificate</span>
+</div>
+<span class="font-mono text-label-md font-label-md font-semibold px-2 py-0.5 bg-surface-container-lowest rounded border border-outline-variant">1 Copy</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low/60 rounded-lg text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">description</span>
+<span class="font-medium text-on-surface">Official Institutional Attestation Letter</span>
+</div>
+<span class="font-mono text-label-md font-label-md font-semibold px-2 py-0.5 bg-surface-container-lowest rounded border border-outline-variant">1 Copy</span>
+</div>
+</div>
+</div>
+<!-- Dispatch Channel -->
+<div class="mt-4 p-3 bg-surface-container-low/50 rounded-lg border border-outline-variant/60 flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-outline block">DISPATCH LOGISTICS</span>
+<p class="text-body-sm font-body-sm text-on-surface font-semibold">Ghana Post EMS Courier</p>
+<p class="text-label-md font-label-md text-on-surface-variant">Accra Destination Hub (Delivery Address on file)</p>
+</div>
+</div>
+<!-- Notifications Prompt Box -->
+<div class="mt-4 flex items-start gap-2.5 p-3 rounded-lg bg-surface-container-low text-primary-container">
+<span class="material-symbols-outlined text-base mt-0.5 shrink-0">mark_chat_unread</span>
+<p class="text-label-md font-label-md text-on-surface-variant">
+            SMS and Email notifications will be sent at each registry milestone to your registered contact endpoints.
+          </p>
+</div>
+<!-- Primary Call to Actions -->
+<div class="mt-6 flex flex-col sm:flex-row gap-3">
+<button class="flex-1 py-3 px-4 rounded-lg bg-surface-container-lowest border-1.5 border-primary text-primary hover:bg-primary/5 text-label-lg font-label-lg font-semibold flex items-center justify-center gap-2 transition-all" onclick="downloadPdfReceipt()">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Download Payment Receipt (PDF)</span>
+</button>
+<button class="flex-1 py-3 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary text-label-lg font-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98" onclick="switchView('tracking')">
+<span class="material-symbols-outlined text-lg">timeline</span>
+<span>Track Status Live</span>
+</button>
+</div>
+</article>
+<!-- Institutional Security Badge Component -->
+<section class="p-4 bg-surface-container-lowest rounded-xl border border-secondary-container/80 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed/30 border border-secondary text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<div class="flex-1">
+<h2 class="text-title-sm font-title-sm text-on-surface font-bold">Authentic Catholic University Document Token</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">
+            Tamper-proof digital seal with cryptographic verification hash <span class="font-mono text-outline">#CUG-SHA256-7881</span>.
+          </p>
+</div>
+</section>
+</div>
+<!-- ========================================== -->
+<!-- VIEW 2: NO-LOGIN REQUEST TRACKER & TIMELINE -->
+<!-- ========================================== -->
+<div class="space-y-6 hidden" id="viewTracking">
+<!-- Query / Lookup Box for Returning Students -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">search_check</span>
+<h2 class="text-title-md font-title-md font-bold text-on-surface">No-Login Request Retrieval</h2>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+          Check live processing stages without logging in. Enter your reference number and identifier.
+        </p>
+<form class="space-y-3" onsubmit="handleTrackSearch(event)">
+<div>
+<label class="block text-label-md font-label-md text-on-surface font-medium mb-1" for="inputRef">
+              Request Reference Number <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">tag</span>
+<input class="w-full pl-9 pr-3 py-2 text-body-md font-mono bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface" id="inputRef" required="" type="text" value="CUG-REQ-2026-8941"/>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface font-medium mb-1" for="inputStudent">
+              Student Index Number or Phone Number <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">badge</span>
+<input class="w-full pl-9 pr-3 py-2 text-body-md font-body-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface" id="inputStudent" required="" type="text" value="CUG/BIT/20/004"/>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg font-semibold hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-lg">refresh</span>
+<span>Refresh Milestone Status</span>
+</button>
+</form>
+</section>
+<!-- ACTIVE STATUS STEPPER (5 Administrative Stages) -->
+<section class="bg-surface-container-lowest rounded-xl p-5 sm:p-6 border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60 mb-6">
+<div>
+<span class="text-label-sm font-label-sm text-outline block">CURRENT PIPELINE STATUS</span>
+<h2 class="text-title-lg font-title-lg text-primary font-bold">Records Processing In Progress</h2>
+</div>
+<span class="px-2.5 py-1 bg-secondary-fixed/50 text-on-secondary-container border border-secondary-fixed-dim rounded-full text-label-sm font-label-sm font-bold animate-pulse">
+            STAGE 3 OF 5
+          </span>
+</div>
+<!-- The Stepper Tree -->
+<ol class="relative border-l-2 border-outline-variant ml-4 sm:ml-6 space-y-8">
+<!-- STAGE 1: COMPLETED -->
+<li class="relative pl-6 sm:pl-8">
+<div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-green-100 text-green-700 border-2 border-green-600 flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+<div class="bg-surface-container-low/40 p-3 rounded-lg border border-outline-variant/50">
+<div class="flex items-center justify-between">
+<h3 class="text-title-sm font-title-sm text-on-surface font-bold">Payment Verified</h3>
+<span class="text-label-sm font-label-sm text-green-700 font-semibold bg-green-50 px-2 py-0.5 rounded border border-green-200">Completed</span>
+</div>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">28 Oct 2026, 09:14 AM</p>
+<p class="text-body-sm font-body-sm text-on-surface mt-1 font-mono">Gateway Ref: CUG-PAY-7721 (GHS 225.00 MTN MoMo)</p>
+</div>
+</li>
+<!-- STAGE 2: COMPLETED -->
+<li class="relative pl-6 sm:pl-8">
+<div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-green-100 text-green-700 border-2 border-green-600 flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+<div class="bg-surface-container-low/40 p-3 rounded-lg border border-outline-variant/50">
+<div class="flex items-center justify-between">
+<h3 class="text-title-sm font-title-sm text-on-surface font-bold">Financial Clearance</h3>
+<span class="text-label-sm font-label-sm text-green-700 font-semibold bg-green-50 px-2 py-0.5 rounded border border-green-200">Completed</span>
+</div>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">28 Oct 2026, 11:30 AM</p>
+<p class="text-body-sm font-body-sm text-on-surface mt-1">Cleared by Finance Directorate; No Academic Fee Arrears found.</p>
+</div>
+</li>
+<!-- STAGE 3: ACTIVE PULSING (BURGUNDY & GOLD ACCENT) -->
+<li class="relative pl-6 sm:pl-8">
+<div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-secondary-container flex items-center justify-center shadow-md animate-pulse-subtle">
+<span class="material-symbols-outlined text-base">hourglass_top</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg border-2 border-primary/40 shadow-sm relative">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-title-md font-title-md text-primary font-bold">Records Office Preparation</h3>
+<span class="text-label-sm font-label-sm text-primary-container bg-primary-fixed font-bold px-2 py-0.5 rounded border border-outline-variant">In Progress</span>
+</div>
+<p class="text-label-md font-label-md text-on-surface-variant">Estimated Completion: Today, 3:30 PM</p>
+<div class="mt-2.5 p-2 bg-surface-container-low rounded border border-outline-variant/40 flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5">place</span>
+<p class="text-body-sm font-body-sm text-on-surface">
+                  Assigned Officer: Senior Archivist Desk, <span class="font-semibold text-primary">Academic Affairs Registry Room 104</span>, Sunyani - Fiapre Campus.
+                </p>
+</div>
+</div>
+</li>
+<!-- STAGE 4: UPCOMING -->
+<li class="relative pl-6 sm:pl-8 opacity-75">
+<div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-surface-container-low text-outline border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-base">ink_pen</span>
+</div>
+<div class="p-3 bg-surface-container-low/20 rounded-lg border border-dashed border-outline-variant">
+<div class="flex items-center justify-between">
+<h3 class="text-title-sm font-title-sm text-outline font-semibold">Signed &amp; Sealed by Academic Registrar</h3>
+<span class="text-label-sm font-label-sm text-outline font-medium">Pending</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Pending institutional embossment and dry registry seal endorsement.</p>
+</div>
+</li>
+<!-- STAGE 5: UPCOMING -->
+<li class="relative pl-6 sm:pl-8 opacity-75">
+<div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-surface-container-low text-outline border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-base">local_shipping</span>
+</div>
+<div class="p-3 bg-surface-container-low/20 rounded-lg border border-dashed border-outline-variant">
+<div class="flex items-center justify-between">
+<h3 class="text-title-sm font-title-sm text-outline font-semibold">Dispatched via Ghana Post EMS</h3>
+<span class="text-label-sm font-label-sm text-outline font-medium">Upcoming</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Waybill will be generated automatically upon dispatch handover.</p>
+</div>
+</li>
+</ol>
+</section>
+<!-- COURIER TRACKING PREVIEW & CONTACT HOTLINE -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">markunread_mailbox</span>
+</div>
+<div>
+<h3 class="text-title-sm font-title-sm text-on-surface font-bold">Ghana Post EMS Courier Logistics</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Tracking Number assigned upon handover</p>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low/70 rounded-lg border border-outline-variant/60">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="text-outline">Scheduled Waybill:</span>
+<span class="font-mono text-on-surface font-semibold">Pending Registry Sign-off</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm mt-1">
+<span class="text-outline">Delivery Hub:</span>
+<span class="text-on-surface font-medium">Greater Accra Regional Distribution Center</span>
+</div>
+</div>
+<!-- Registry Inquiry Hotline -->
+<div class="pt-3 border-t border-outline-variant/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<span class="text-label-sm font-label-sm text-outline block">ACADEMIC REGISTRY SUPPORT HOTLINE</span>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-0.5">
+<a class="inline-flex items-center gap-1 text-label-md font-label-md text-primary font-bold hover:underline" href="tel:+233352091234">
+<span class="material-symbols-outlined text-sm">call</span>
+                +233 35 209 1234
+              </a>
+<span class="text-outline hidden sm:inline">•</span>
+<a class="inline-flex items-center gap-1 text-label-md font-label-md text-primary font-medium hover:underline" href="mailto:academic.registry@cug.edu.gh">
+<span class="material-symbols-outlined text-sm">mail</span>
+                academic.registry@cug.edu.gh
+              </a>
+</div>
+</div>
+<a class="px-3 py-1.5 bg-surface-container-low text-primary text-label-sm font-label-sm font-bold rounded-lg hover:bg-surface-container transition-colors text-center" href="tel:+233352091234">
+            Call Desk
+          </a>
+</div>
+</section>
+<!-- OFFICIAL DATA PRIVACY NOTICE -->
+<footer class="p-4 bg-surface-container-low/60 rounded-xl border border-outline-variant/50 text-center">
+<div class="flex items-center justify-center gap-1.5 text-secondary mb-1">
+<span class="material-symbols-outlined text-base">privacy_tip</span>
+<span class="text-label-sm font-label-sm font-bold">Confidential Administrative Shield</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant max-w-lg mx-auto">
+          Official Notice: Document verification does not publicly expose sensitive academic grades or identity data. All credentials remain encrypted according to CUG Statutes and Ghana Data Protection Act 2012 (Act 843).
+        </p>
+</footer>
+</div>
+</main>
+<!-- BOTTOM NAVBAR (from Shared Components JSON: BottomNavBar) -->
+<!-- Active state assigned to "Track" (index 3) according to destination intent hierarchy -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 bg-surface-container-lowest dark:bg-inverse-surface shadow-md dark:shadow-none">
+<!-- Requests -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-tertiary-container hover:text-on-surface dark:hover:text-inverse-on-surface transition-all active:scale-96" href="#requests">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="text-label-sm font-label-sm mt-0.5">Requests</span>
+</a>
+<!-- New Order -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-tertiary-container hover:text-on-surface dark:hover:text-inverse-on-surface transition-all active:scale-96" href="#new-order">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+<span class="text-label-sm font-label-sm mt-0.5">New Order</span>
+</a>
+<!-- Verify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-3 py-1.5 hover:bg-surface-container-high dark:hover:bg-tertiary-container hover:text-on-surface dark:hover:text-inverse-on-surface transition-all active:scale-96" href="#verify">
+<span class="material-symbols-outlined text-xl">fact_check</span>
+<span class="text-label-sm font-label-sm mt-0.5">Verify</span>
+</a>
+<!-- Track (ACTIVE TAB) -->
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-lg px-3 py-1.5 transition-all active:scale-96 shadow-xs" href="#track">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">timeline</span>
+<span class="text-label-sm font-label-sm font-bold mt-0.5">Track</span>
+</a>
+</nav>
+<!-- MICRO-INTERACTIONS & TAB LOGIC JAVASCRIPT -->
+<script>
+    function switchView(viewName) {
+      const viewConfirmation = document.getElementById('viewConfirmation');
+      const viewTracking = document.getElementById('viewTracking');
+      const tabConfirmationBtn = document.getElementById('tabConfirmationBtn');
+      const tabTrackingBtn = document.getElementById('tabTrackingBtn');
+
+      if (viewName === 'confirmation') {
+        viewConfirmation.classList.remove('hidden');
+        viewTracking.classList.add('hidden');
+
+        tabConfirmationBtn.className = "flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 bg-surface-container-lowest text-primary shadow-sm font-semibold transition-all";
+        tabTrackingBtn.className = "flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 text-on-surface-variant hover:text-primary transition-all";
+      } else {
+        viewConfirmation.classList.add('hidden');
+        viewTracking.classList.remove('hidden');
+
+        tabTrackingBtn.className = "flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 bg-surface-container-lowest text-primary shadow-sm font-semibold transition-all";
+        tabConfirmationBtn.className = "flex-1 py-2 px-3 rounded-lg text-title-sm font-title-sm flex items-center justify-center gap-2 text-on-surface-variant hover:text-primary transition-all";
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyReferenceCode() {
+      const code = document.getElementById('refCode').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const textSpan = document.getElementById('copyText');
+        const iconSpan = document.getElementById('copyIcon');
+        textSpan.innerText = 'Copied!';
+        iconSpan.innerText = 'check';
+        setTimeout(() => {
+          textSpan.innerText = 'Copy Reference';
+          iconSpan.innerText = 'content_copy';
+        }, 2000);
+      });
+    }
+
+    function toggleSideDrawer() {
+      const drawer = document.getElementById('navDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      if (drawer.classList.contains('-translate-x-full')) {
+        drawer.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        drawer.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function downloadPdfReceipt() {
+      alert("Preparing official CUG digital receipt (Reference: CUG-REQ-2026-8941)... Download will commence.");
+    }
+
+    function handleTrackSearch(e) {
+      e.preventDefault();
+      const ref = document.getElementById('inputRef').value;
+      alert(`Refreshing status for Request Docket: ${ref} ... Status up to date.`);
+    }
+  </script>
+</body></html>
