@@ -1,5 +1,7 @@
 # CUG ASRVS: Testing Strategy & Test Plan
 
+> **Status:** The API and end-to-end cases below are planned. Only the client Vitest unit tests are currently implemented in this checkout.
+
 ## 1. Automated Test Hierarchy
 
 ```

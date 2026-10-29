@@ -1,5 +1,7 @@
 # CUG ASRVS: REST API Specification
 
+> **Status:** Proposed API contract only. No server implementation or live endpoint exists in this repository.
+
 Version: `v1`  
 Base URL: `/api/v1`
 

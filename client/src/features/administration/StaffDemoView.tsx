@@ -25,6 +25,10 @@ export const StaffDemoView: React.FC = () => {
         </p>
       </section>
 
+      <p role="note" className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-body-sm text-amber-900">
+        Demonstration only: this public screen has no staff sign-in, authorization, live records, or persistent actions. Do not use it to process university requests.
+      </p>
+
       {/* Role Navigation Bar */}
       <div className="bg-surface-container-low p-1.5 rounded-xl flex flex-wrap items-center gap-1 border border-outline-variant/60 shadow-xs">
         {[

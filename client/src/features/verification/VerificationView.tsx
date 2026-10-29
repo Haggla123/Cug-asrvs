@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 export const VerificationView: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [verRef, setVerRef] = useState('');
+  const [submissionAttempted, setSubmissionAttempted] = useState(false);
   const [formData, setFormData] = useState({
     organizationName: '',
     requesterName: '',
@@ -16,10 +15,7 @@ export const VerificationView: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const year = new Date().getFullYear();
-    const code = Math.floor(1000 + Math.random() * 9000);
-    setVerRef(`CUG-VER-${year}-${code}`);
-    setSubmitted(true);
+    setSubmissionAttempted(true);
   };
 
   return (
@@ -46,34 +42,12 @@ export const VerificationView: React.FC = () => {
         </p>
       </section>
 
-      {submitted ? (
-        <div className="bg-surface-container-lowest p-6 sm:p-8 rounded-2xl border border-outline-variant/80 shadow-sm text-center space-y-4 animate-fade-in">
-          <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center">
-            <span className="material-symbols-outlined text-3xl">task_alt</span>
-          </div>
-          <h2 className="text-headline-sm font-serif font-bold text-primary">
-            Verification Request Docket Created
-          </h2>
-          <p className="text-body-md text-on-surface-variant max-w-md mx-auto">
-            Your inquiry has been queued for official archive lookup by the CUG Academic Registry.
+      <>
+        {submissionAttempted && (
+          <p role="alert" className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-body-sm text-amber-900">
+            Verification submission is unavailable because this application has no registry API or secure consent upload service. No request or reference number was created. Please contact the Registrar through official university channels.
           </p>
-          <div className="p-4 bg-surface-container-low rounded-xl border border-outline-variant max-w-sm mx-auto">
-            <span className="text-label-sm text-outline uppercase font-semibold block">
-              Verification Reference Code
-            </span>
-            <span className="font-mono text-title-lg font-bold text-primary">
-              {verRef}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setSubmitted(false)}
-            className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold text-title-sm hover:bg-primary-container transition-colors"
-          >
-            Submit Another Verification
-          </button>
-        </div>
-      ) : (
+        )}
         <form onSubmit={handleSubmit} className="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/70 shadow-sm space-y-5">
           <div className="border-b border-outline-variant/50 pb-3">
             <h2 className="text-title-md font-title-md text-primary font-bold">
@@ -166,7 +140,7 @@ export const VerificationView: React.FC = () => {
             </button>
           </div>
         </form>
-      )}
+      </>
     </div>
   );
 };

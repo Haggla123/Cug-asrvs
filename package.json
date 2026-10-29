@@ -4,15 +4,13 @@
   "description": "Catholic University of Ghana Academic Services Request & Verification System",
   "private": true,
   "workspaces": [
-    "client",
-    "server"
+    "client"
   ],
   "scripts": {
     "dev:client": "npm --workspace=client run dev",
-    "dev:server": "npm --workspace=server run dev",
     "build:client": "npm --workspace=client run build",
-    "build:server": "npm --workspace=server run build",
-    "test": "npm --workspace=client run test && npm --workspace=server run test"
+    "test": "npm --workspace=client run test",
+    "lint": "npm --workspace=client run lint"
   },
   "keywords": [
     "cug",

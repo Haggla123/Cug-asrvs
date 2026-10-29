@@ -6,7 +6,9 @@ Official web portal and administrative management system for the Catholic Univer
 
 ## 1. System Overview
 
-CUG ASRVS provides an institutional platform with four principal capabilities:
+> **Implementation status:** This repository currently contains a client-side prototype only. The documented Express API, PostgreSQL database, payment processing, registry tracking, verification submission, and authenticated staff services are not implemented in this checkout. Do not use this build to collect payments, submit official requests, or process student records. The client stores applicant drafts in browser `localStorage`.
+
+The intended system is designed to provide these capabilities after the backend is implemented:
 1. **Applicant Portal (Zero-Account Required)**: Students and alumni can request multiple official academic credentials (transcripts, English proficiency certifications, introductory letters, certified true copies, recommendations) in a single order with independent copy counters and custom delivery modes.
 2. **Instant Settlement & Reference Tracking**: Applicants pay through Ghana Mobile Money (MTN, Telecel, AT) or Visa/Mastercard, receive unique official reference numbers (`CUG-REQ-YYYY-XXXX`), and track processing across all stages.
 3. **Staff Processing Workbench**: Role-based departmental queues for Finance clearance, Records preparation, Academic Registrar approval/sealing, and Dispatch fulfillment.
@@ -67,26 +69,25 @@ cug-asrvs/
 
 ### Installation
 ```bash
-# Install dependencies in the client
-cd client
+# Install workspace dependencies from the repository root
 npm install
 ```
 
 ### Running the Application
 ```bash
-# Start the client development server
-npm run dev
+# Start the client development server from the repository root
+npm run dev:client
 ```
 
 ### Running Automated Tests
 ```bash
-# Run unit tests with Vitest
+# Run client unit tests with Vitest
 npm test
 ```
 
 ---
 
-## 6. Institutional Architecture & Security Standards
+## 6. Intended Architecture & Security Requirements (Not Implemented)
 - **Decimal-Safe Financial Engine**: All monetary calculations are performed in minor integer currency units (Ghanaian Pesewas: 1 GHS = 100 Pesewas) to prevent floating-point rounding errors.
 - **Immutable Snapshots**: Order item prices are snapshotted in the database upon checkout, ensuring future catalogue price revisions never retroactively affect historical transactions.
 - **2-Factor Public Tracking**: Public order lookup at `/track` requires both the Reference Number and either the Student Index Number or primary registered mobile phone, shielding confidential student data.

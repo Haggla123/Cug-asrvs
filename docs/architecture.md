@@ -1,5 +1,7 @@
 # CUG ASRVS: Architecture & Technical Design
 
+> **Status:** This document describes the target architecture. In the current checkout only the client exists; the Express server, database, payment adapters, and notification services in the diagrams below are not implemented.
+
 ## 1. System Architecture Overview
 
 CUG ASRVS follows a clean, modular monorepo architecture separating the public and staff frontend (`client`), the RESTful backend API (`server`), and system documentation (`docs`).

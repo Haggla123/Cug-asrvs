@@ -13,7 +13,6 @@ import { WizardStepper } from '../components/ui/WizardStepper';
 import { StudentInfoStep } from '../features/applicant/StudentInfoStep';
 import { ServicesDeliveryStep } from '../features/services/ServicesDeliveryStep';
 import { OrderSummaryStep } from '../features/orders/OrderSummaryStep';
-import { ConfirmationTrackingView } from '../features/tracking/ConfirmationTrackingView';
 
 interface RequestWizardPageProps {
   onCancel: () => void;
@@ -21,7 +20,6 @@ interface RequestWizardPageProps {
 
 export const RequestWizardPage: React.FC<RequestWizardPageProps> = ({ onCancel }) => {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
-  const [confirmedRef, setConfirmedRef] = useState<string | null>(null);
 
   // Draft Data States
   const [applicant, setApplicant] = useState<ApplicantInfo | null>(() => DraftStorage.getApplicant());
@@ -101,76 +99,47 @@ export const RequestWizardPage: React.FC<RequestWizardPageProps> = ({ onCancel }
     totalPesewas
   };
 
-  // Handle Payment Settlement
-  const handlePaymentSuccess = (referenceNumber: string) => {
-    setConfirmedRef(referenceNumber);
-    DraftStorage.clearDraft();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // Reset to New Request
-  const handleNewRequest = () => {
-    DraftStorage.clearDraft();
-    setApplicant(null);
-    setItems([]);
-    setConfirmedRef(null);
-    setCurrentStep(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-6">
-      {/* If confirmed, render Confirmation View */}
-      {confirmedRef ? (
-        <ConfirmationTrackingView
-          referenceNumber={confirmedRef}
-          orderDraft={fullOrderDraft}
-          onNewRequest={handleNewRequest}
+      {/* Stepper Navigation */}
+      <WizardStepper
+        currentStep={currentStep}
+        onStepClick={(step) => {
+          if (step === 1) setCurrentStep(1);
+          if (step === 2 && applicant) setCurrentStep(2);
+          if (step === 3 && applicant && items.length > 0) setCurrentStep(3);
+        }}
+        maxAccessibleStep={applicant ? (items.length > 0 ? 3 : 2) : 1}
+      />
+
+      {/* Step 1 */}
+      {currentStep === 1 && (
+        <StudentInfoStep
+          initialData={applicant}
+          onContinue={handleStep1Complete}
+          onCancel={onCancel}
         />
-      ) : (
-        <>
-          {/* Stepper Navigation */}
-          <WizardStepper
-            currentStep={currentStep}
-            onStepClick={(step) => {
-              if (step === 1) setCurrentStep(1);
-              if (step === 2 && applicant) setCurrentStep(2);
-              if (step === 3 && applicant && items.length > 0) setCurrentStep(3);
-            }}
-            maxAccessibleStep={applicant ? (items.length > 0 ? 3 : 2) : 1}
-          />
+      )}
 
-          {/* Step 1 */}
-          {currentStep === 1 && (
-            <StudentInfoStep
-              initialData={applicant}
-              onContinue={handleStep1Complete}
-              onCancel={onCancel}
-            />
-          )}
+      {/* Step 2 */}
+      {currentStep === 2 && (
+        <ServicesDeliveryStep
+          initialItems={items}
+          initialReason={reason}
+          initialRecipient={recipient}
+          initialDelivery={delivery}
+          onContinue={handleStep2Complete}
+          onBack={() => setCurrentStep(1)}
+        />
+      )}
 
-          {/* Step 2 */}
-          {currentStep === 2 && (
-            <ServicesDeliveryStep
-              initialItems={items}
-              initialReason={reason}
-              initialRecipient={recipient}
-              initialDelivery={delivery}
-              onContinue={handleStep2Complete}
-              onBack={() => setCurrentStep(1)}
-            />
-          )}
-
-          {/* Step 3 */}
-          {currentStep === 3 && (
-            <OrderSummaryStep
-              draft={fullOrderDraft}
-              onEditApplicant={() => setCurrentStep(1)}
-              onEditServices={() => setCurrentStep(2)}
-              onPaymentSuccess={handlePaymentSuccess}
-            />
-          )}
-        </>
+      {/* Step 3 */}
+      {currentStep === 3 && (
+        <OrderSummaryStep
+          draft={fullOrderDraft}
+          onEditApplicant={() => setCurrentStep(1)}
+          onEditServices={() => setCurrentStep(2)}
+        />
       )}
     </div>
   );

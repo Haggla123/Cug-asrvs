@@ -1,5 +1,7 @@
 # CUG ASRVS: Security & Data Protection Specification
 
+> **Status:** Target controls only. This frontend-only checkout does not implement the backend controls described below; do not treat this specification as evidence of current security.
+
 ## 1. Threat Modeling & Countermeasures
 
 ### 1.1 Insecure Direct Object References (IDOR) on Tracking

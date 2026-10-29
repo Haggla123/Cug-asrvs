@@ -7,20 +7,17 @@ interface OrderSummaryStepProps {
   draft: OrderDraft;
   onEditApplicant: () => void;
   onEditServices: () => void;
-  onPaymentSuccess: (referenceNumber: string) => void;
 }
 
 export const OrderSummaryStep: React.FC<OrderSummaryStepProps> = ({
   draft,
   onEditApplicant,
-  onEditServices,
-  onPaymentSuccess
+  onEditServices
 }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'momo' | 'card'>('momo');
   const [momoNetwork, setMomoNetwork] = useState<'mtn' | 'telecel' | 'at'>('mtn');
   const [momoNumber, setMomoNumber] = useState(draft.applicant.phone);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [processingStage, setProcessingStage] = useState<string>('');
+  const [paymentUnavailable, setPaymentUnavailable] = useState(false);
 
   const getDeliveryLabel = (method: DeliveryMethod) => {
     switch (method) {
@@ -38,26 +35,7 @@ export const OrderSummaryStep: React.FC<OrderSummaryStepProps> = ({
   };
 
   const handlePayNow = () => {
-    setIsProcessing(true);
-    setProcessingStage('Validating request items & price snapshots...');
-
-    setTimeout(() => {
-      setProcessingStage('Creating secure payment transaction...');
-      setTimeout(() => {
-        setProcessingStage('Authorizing mobile money prompt / card checkout...');
-        setTimeout(() => {
-          setProcessingStage('Confirming settlement & generating CUG Registry Reference...');
-          setTimeout(() => {
-            // Generate official human-readable reference: CUG-REQ-YYYY-XXXX
-            const year = new Date().getFullYear();
-            const randomCode = Math.floor(1000 + Math.random() * 9000);
-            const refNumber = `CUG-REQ-${year}-${randomCode}`;
-            setIsProcessing(false);
-            onPaymentSuccess(refNumber);
-          }, 700);
-        }, 700);
-      }, 700);
-    }, 600);
+    setPaymentUnavailable(true);
   };
 
   return (
@@ -358,7 +336,6 @@ export const OrderSummaryStep: React.FC<OrderSummaryStepProps> = ({
         <button
           type="button"
           onClick={handlePayNow}
-          disabled={isProcessing}
           className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container active:bg-primary focus:ring-2 focus:ring-secondary/50 font-title-sm font-semibold shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <span className="material-symbols-outlined text-xl">payments</span>
@@ -366,33 +343,10 @@ export const OrderSummaryStep: React.FC<OrderSummaryStepProps> = ({
         </button>
       </div>
 
-      {/* PROCESSING MODAL */}
-      {isProcessing && (
-        <div className="fixed inset-0 bg-tertiary/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-outline-variant text-center space-y-4 animate-scale-up">
-            <div className="w-16 h-16 rounded-full bg-primary/10 text-primary mx-auto flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl animate-spin">
-                sync
-              </span>
-            </div>
-
-            <h3 className="text-headline-sm font-serif font-bold text-primary">
-              Processing Payment
-            </h3>
-
-            <p className="text-body-md text-on-surface-variant font-medium">
-              {processingStage}
-            </p>
-
-            <div className="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
-              <div className="bg-primary h-full animate-pulse w-3/4 rounded-full" />
-            </div>
-
-            <p className="text-label-sm text-outline">
-              Do not refresh this window. Your order total of {formatPesewas(draft.totalPesewas)} is being verified.
-            </p>
-          </div>
-        </div>
+      {paymentUnavailable && (
+        <p role="alert" className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-body-sm text-amber-900">
+          Online payment is unavailable because this application is not connected to a payment service or order API. No payment was taken and no request was submitted. Your draft remains saved in this browser.
+        </p>
       )}
     </div>
   );
