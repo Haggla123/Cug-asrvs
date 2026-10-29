@@ -24,14 +24,23 @@ export const VerificationView: React.FC = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6 pb-24">
-      <section className="space-y-1.5">
-        <div className="inline-flex items-center gap-1.5 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
-          <span className="material-symbols-outlined text-sm">verified</span>
-          <span>External Institutional Gateway</span>
+      <section className="space-y-2">
+        <div className="flex items-center gap-3.5">
+          <img 
+            src="/cug-logo.png" 
+            alt="Catholic University Crest" 
+            className="w-12 h-12 object-contain drop-shadow-xs shrink-0" 
+          />
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+              <span className="material-symbols-outlined text-sm">verified</span>
+              <span>External Institutional Gateway</span>
+            </div>
+            <h1 className="text-headline-sm sm:text-headline-md font-serif text-primary tracking-tight font-bold leading-tight">
+              Academic Verification Portal
+            </h1>
+          </div>
         </div>
-        <h1 className="text-headline-sm sm:text-headline-md font-serif text-primary tracking-tight font-bold">
-          Academic Verification Portal
-        </h1>
         <p className="text-body-md font-body-md text-on-surface-variant">
           Employers, embassies, and educational institutions can submit requests to verify academic credentials, degrees, and transcripts issued by Catholic University of Ghana.
         </p>

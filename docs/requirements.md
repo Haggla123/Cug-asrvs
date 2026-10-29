@@ -33,7 +33,7 @@ The Catholic University of Ghana Academic Services Request & Verification System
 - Courier Fees:
   - Domestic (Ghana Post EMS): GHS 50.00
   - International (DHL Express): GHS 350.00
-- Pickup Location: Academic Affairs Office Desk, Room 104, Fiapre-Sunyani Campus.
+- Pickup Location: Academic Affairs Office Desk, Fiapre-Sunyani Campus.
 - Faculties and Programmes catalogue.
 - Staff role permissions and document signing protocols.
 

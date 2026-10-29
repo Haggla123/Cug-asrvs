@@ -7,7 +7,7 @@ This document tracks all assumptions, configurable defaults, and unresolved inst
 - **Courier Flat Rates**: Domestic courier is defaulted to GHS 50 (Ghana Post EMS) and international to GHS 350 (DHL Express). In production, these may be replaced with zone-based or weight-based dynamic rate tables.
 
 ### 2. Operational Logistics & Campus Desks
-- **Collection Location**: The default pickup location is set to *Academic Affairs Office Desk, Room 104, Fiapre-Sunyani Campus*. Confirmation is required if additional collection desks exist at satellite campuses (e.g. Sunyani City Campus).
+- **Collection Location**: The default pickup location is set to *Academic Affairs Office Desk, Fiapre-Sunyani Campus*. Confirmation is required if additional collection desks exist at satellite campuses (e.g. Sunyani City Campus).
 - **Authorized Proxy Identification**: Default workflow collects Proxy Legal Name. Collecting Ghana Card numbers is kept optional at the configuration level until approved under Ghanaian Data Protection Act procedures.
 
 ### 3. Institutional Systems & Records Integration

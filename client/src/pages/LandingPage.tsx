@@ -28,9 +28,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* HERO SECTION */}
       <section className="relative overflow-hidden pt-8 pb-12 sm:pt-14 sm:pb-20 institutional-mesh border-b border-outline-variant/60">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
-            <span className="material-symbols-outlined text-sm">account_balance</span>
-            <span>Office of the Registrar • Fiapre-Sunyani</span>
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src="/cug-logo.png" 
+              alt="Catholic University of Ghana Crest" 
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md mx-auto"
+            />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+              <span className="material-symbols-outlined text-sm">account_balance</span>
+              <span>Office of the Registrar • Fiapre-Sunyani</span>
+            </div>
           </div>
 
           <h1 className="text-display-lg-mobile sm:text-display-lg font-serif font-bold text-primary tracking-tight leading-tight max-w-3xl mx-auto">
@@ -63,38 +70,51 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Quick Tracking Search Box */}
           <div className="max-w-2xl mx-auto pt-6">
-            <form onSubmit={handleQuickTrack} className="bg-surface-container-lowest p-3 sm:p-4 rounded-2xl border border-outline-variant/80 shadow-md flex flex-col sm:flex-row items-center gap-2.5">
-              <div className="w-full sm:flex-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
-                  <span className="material-symbols-outlined text-lg">search</span>
+            <div className="bg-surface-container-lowest p-3.5 sm:p-4 rounded-2xl border border-outline-variant/80 shadow-md">
+              <div className="text-left mb-2.5 px-1 flex items-center justify-between">
+                <span className="text-label-sm font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-secondary text-[16px]">verified</span>
+                  <span>Quick Request Status Lookup</span>
+                </span>
+                <span className="text-[11px] text-outline">No login required</span>
+              </div>
+
+              <form onSubmit={handleQuickTrack} className="flex flex-col sm:flex-row items-stretch gap-2.5">
+                <div className="w-full sm:flex-1 relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                    <span className="material-symbols-outlined text-lg">search</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Order Reference (e.g. CUG-REQ-2026-8941)"
+                    value={quickRef}
+                    onChange={e => setQuickRef(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary focus:bg-surface-container-lowest transition-colors"
+                  />
                 </div>
-                <input
-                  type="text"
-                  placeholder="Order Reference (e.g. CUG-REQ-2026-8941)"
-                  value={quickRef}
-                  onChange={e => setQuickRef(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary"
-                />
-              </div>
 
-              <div className="w-full sm:w-48 relative">
-                <input
-                  type="text"
-                  placeholder="Index / Phone"
-                  value={quickIndex}
-                  onChange={e => setQuickIndex(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary"
-                />
-              </div>
+                <div className="w-full sm:w-52 relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                    <span className="material-symbols-outlined text-lg">badge</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Index / Phone"
+                    value={quickIndex}
+                    onChange={e => setQuickIndex(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary focus:bg-surface-container-lowest transition-colors"
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-secondary text-white hover:bg-secondary-container hover:text-on-secondary-container transition-colors font-semibold text-label-md shrink-0 flex items-center justify-center gap-1.5"
-              >
-                <span>Track</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-secondary text-white hover:bg-secondary-container hover:text-on-secondary-container active:scale-98 transition-all font-semibold text-label-md shrink-0 flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <span>Track</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -222,7 +242,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               {
                 step: '04',
                 title: 'Fulfillment',
-                desc: 'Collect at Fiapre Desk Room 104, receive PDF by email, or track express courier dispatch.'
+                desc: 'Collect at Academic Affairs Office Desk, Fiapre-Sunyani Campus, receive PDF by email, or track express courier dispatch.'
               }
             ].map((s) => (
               <div key={s.step} className="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/60 shadow-xs space-y-2">

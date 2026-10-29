@@ -107,9 +107,11 @@ export const ConfirmationTrackingView: React.FC<ConfirmationTrackingViewProps> =
           {/* Primary Success Card */}
           <article className="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-outline-variant/80 shadow-sm relative overflow-hidden">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-2xl font-bold">verified</span>
-              </div>
+              <img
+                src="/cug-logo.png"
+                alt="Catholic University Crest"
+                className="w-14 h-14 object-contain shrink-0 drop-shadow-xs"
+              />
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-label-sm font-label-sm font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
@@ -209,7 +211,7 @@ export const ConfirmationTrackingView: React.FC<ConfirmationTrackingViewProps> =
                   </p>
                 ) : orderDraft.delivery.method === 'PROXY_PICKUP' ? (
                   <p className="text-on-surface-variant mt-0.5">
-                    Authorized proxy ({orderDraft.delivery.proxyName}) may collect at Room 104 Fiapre Campus with a valid ID and this reference code.
+                    Authorized proxy ({orderDraft.delivery.proxyName}) may collect at the {PICKUP_LOCATION_DEFAULT} with a valid national ID and this reference code.
                   </p>
                 ) : orderDraft.delivery.method === 'EMAIL' ? (
                   <p className="text-on-surface-variant mt-0.5">

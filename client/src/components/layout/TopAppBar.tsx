@@ -33,9 +33,11 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             onClick={onNavigateHome}
             className="flex items-center gap-2.5 cursor-pointer select-none group"
           >
-            <div className="w-9 h-9 rounded-lg bg-primary-container text-white flex items-center justify-center font-serif font-bold text-lg shadow-sm gold-seal-border group-hover:scale-105 transition-transform">
-              C
-            </div>
+            <img 
+              src="/cug-logo.png" 
+              alt="Catholic University of Ghana Crest" 
+              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform shrink-0 drop-shadow-xs" 
+            />
             <div>
               <span className="text-title-lg font-serif font-bold tracking-tight text-primary leading-none block">
                 CUG ASRVS
@@ -100,8 +102,8 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             onClick={onNavigateTrack}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-primary hover:bg-surface-container-high transition-colors text-label-md font-label-md font-medium"
           >
-            <span className="material-symbols-outlined text-[18px]">timeline</span>
-            <span className="hidden xs:inline">Track</span>
+            <span className="material-symbols-outlined text-[17px] text-secondary">timeline</span>
+            <span className="text-label-sm font-semibold">Track</span>
           </button>
         </div>
       </div>

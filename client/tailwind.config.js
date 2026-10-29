@@ -8,6 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Catholic University of Ghana Crest Palette
+        "cug-red": "#ED1B24",
+        "cug-burgundy": "#6B1D2F",
+        "cug-crimson": "#8B1528",
+        "cug-gold": "#FECE00",
+        "cug-darkgold": "#775A00",
+        "cug-green": "#049049",
+        "cug-charcoal": "#111C2D",
+
+        // Institutional Semantic Tokens
         "surface-bright": "#f9f9ff",
         "primary-fixed-dim": "#ffb2bc",
         "secondary": "#775a00",
@@ -21,12 +31,13 @@ export default {
         "tertiary": "#172538",
         "on-primary-fixed-variant": "#7c2a3b",
         "on-surface": "#111c2d",
-        "primary": "#4e051a",
+        "primary": "#6b1d2f",             // Authentic CUG Burgundy matching crest
+        "primary-container": "#8b1528",   // Rich heraldic crimson
         "tertiary-container": "#2d3b4f",
         "tertiary-fixed-dim": "#b9c7e0",
         "surface": "#f9f9ff",
         "error": "#ba1a1a",
-        "secondary-container": "#fece57",
+        "secondary-container": "#fece00", // Exact crest motto ribbon gold
         "error-container": "#ffdad6",
         "surface-container-low": "#f0f3ff",
         "surface-container": "#e7eeff",
@@ -42,7 +53,6 @@ export default {
         "on-primary": "#ffffff",
         "on-tertiary-fixed": "#0d1c2f",
         "surface-dim": "#cfdaf2",
-        "primary-container": "#6b1d2f",
         "inverse-surface": "#263143",
         "secondary-fixed": "#ffdf98",
         "on-error-container": "#93000a",

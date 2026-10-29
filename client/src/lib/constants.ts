@@ -119,4 +119,4 @@ export const DELIVERY_FEES: Record<DeliveryMethod, number> = {
   INTERNATIONAL_COURIER: 35000 // GHS 350.00 (DHL Express)
 };
 
-export const PICKUP_LOCATION_DEFAULT = 'Academic Affairs Office Desk, Room 104, Fiapre-Sunyani Campus';
+export const PICKUP_LOCATION_DEFAULT = 'Academic Affairs Office Desk, Fiapre-Sunyani Campus';

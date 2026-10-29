@@ -41,9 +41,11 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         {/* Header */}
         <div className="pb-4 border-b border-outline-variant mb-4">
           <div className="flex items-center justify-between mb-3">
-            <div className="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-headline-sm shadow-sm gold-seal-border">
-              <span className="material-symbols-outlined text-[26px]">school</span>
-            </div>
+            <img 
+              src="/cug-logo.png" 
+              alt="Catholic University of Ghana Crest" 
+              className="w-12 h-12 object-contain drop-shadow-xs shrink-0" 
+            />
             <button 
               type="button"
               className="p-1 text-on-surface-variant hover:text-primary rounded-lg hover:bg-surface-container-low transition-colors"
