@@ -142,7 +142,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <span className="text-outline text-label-sm block">Desk Collection:</span>
                 <span className="text-primary font-medium text-[12px] block leading-tight">
-                  Academic Affairs Office Desk, Fiapre-Sunyani Campus
+                  Academic Affairs Office Desk
                 </span>
               </li>
               <li className="pt-1 text-label-sm font-label-sm text-outline">

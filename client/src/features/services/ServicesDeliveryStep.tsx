@@ -72,7 +72,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Calculations
-  const { totalPesewas } = calculateOrderTotals(
+  const { subtotalPesewas, deliveryFeePesewas, totalPesewas } = calculateOrderTotals(
     selectedItems.map(item => ({ unitPricePesewas: item.unitPricePesewas, quantity: item.quantity })),
     DELIVERY_FEES[deliveryMethod]
   );

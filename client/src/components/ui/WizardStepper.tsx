@@ -35,6 +35,7 @@ export const WizardStepper: React.FC<WizardStepperProps> = ({
         {steps.map((step) => {
           const isCompleted = step.number < currentStep;
           const isActive = step.number === currentStep;
+          const isPending = step.number > currentStep;
           const isClickable = onStepClick && step.number <= maxAccessibleStep;
 
           return (
