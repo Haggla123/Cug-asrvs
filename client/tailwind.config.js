@@ -12,9 +12,14 @@ export default {
         "cug-red": "#ED1B24",
         "cug-burgundy": "#6B1D2F",
         "cug-crimson": "#8B1528",
-        "cug-gold": "#FECE00",
+        "cug-gold": "#c8a951",            // Official CUG website gold
+        "cug-gold-hover": "#b8983e",      // Gold hover state
+        "cug-gold-light": "#fbf8f0",      // Warm gold surface tint
         "cug-darkgold": "#775A00",
-        "cug-green": "#049049",
+        "cug-green": "#004C23",           // Official CUG green (from cug.edu.gh meta theme)
+        "cug-green-light": "#006830",     // Hover green
+        "cug-green-dark": "#003318",      // Dark forest green (header / overlay)
+        "cug-green-deep": "#002411",      // Deepest green accent
         "cug-charcoal": "#111C2D",
 
         // Institutional Semantic Tokens

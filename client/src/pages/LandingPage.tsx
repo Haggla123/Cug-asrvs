@@ -25,26 +25,36 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
   return (
     <div className="space-y-16 pb-16">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-12 sm:pt-14 sm:pb-20 institutional-mesh border-b border-outline-variant/60">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      {/* HERO SECTION — full campus-photo background */}
+      <section className="relative overflow-hidden border-b border-outline-variant/60 min-h-[560px] sm:min-h-[640px] flex items-center">
+        {/* Background campus photo */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/cug-campus.jpg')" }}
+          aria-hidden="true"
+        />
+        {/* Dark green overlay for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cug-green-dark/85 via-cug-green/75 to-cug-green-dark/90" aria-hidden="true" />
+
+        {/* Content sits above the overlay */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center space-y-6">
           <div className="flex flex-col items-center gap-3">
-            <img 
-              src="/cug-logo.png" 
-              alt="Catholic University of Ghana Crest" 
-              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md mx-auto"
+            <img
+              src="/cug-logo.png"
+              alt="Catholic University of Ghana Crest"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-lg mx-auto"
             />
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-cug-gold text-label-sm font-bold uppercase tracking-wider">
               <span className="material-symbols-outlined text-sm">account_balance</span>
               <span>Office of the Registrar • Fiapre-Sunyani</span>
             </div>
           </div>
 
-          <h1 className="text-display-lg-mobile sm:text-display-lg font-serif font-bold text-primary tracking-tight leading-tight max-w-3xl mx-auto">
+          <h1 className="text-display-lg-mobile sm:text-display-lg font-serif font-bold text-white tracking-tight leading-tight max-w-3xl mx-auto drop-shadow-md">
             Academic Services Request &amp; Verification System
           </h1>
 
-          <p className="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          <p className="text-body-lg font-body-lg text-white/85 max-w-2xl mx-auto drop-shadow-sm">
             Order official academic transcripts, English proficiency certifications, introductory letters, and verified certificate copies without an account. Track your requests in real-time from financial clearance through registrar sealing.
           </p>
 
@@ -52,7 +62,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <button
               type="button"
               onClick={onStartRequest}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container active:bg-primary font-title-sm font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-cug-gold text-cug-green-dark hover:bg-cug-gold-hover active:scale-98 font-title-sm font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2.5"
             >
               <span className="material-symbols-outlined text-xl">add_circle</span>
               <span>Start New Document Request</span>
@@ -61,7 +71,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <button
               type="button"
               onClick={() => onTrackOrder()}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-primary hover:bg-surface-container transition-all font-title-sm font-medium flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-lg border-2 border-white/50 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all font-title-sm font-medium flex items-center justify-center gap-2"
             >
               <span className="material-symbols-outlined text-xl">timeline</span>
               <span>Track Existing Order</span>
@@ -69,8 +79,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Quick Tracking Search Box */}
-          <div className="max-w-2xl mx-auto pt-6">
-            <div className="bg-surface-container-lowest p-3.5 sm:p-4 rounded-2xl border border-outline-variant/80 shadow-md">
+          <div className="max-w-2xl mx-auto pt-4">
+            <div className="bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl border border-white/60 shadow-xl">
               <div className="text-left mb-2.5 px-1 flex items-center justify-between">
                 <span className="text-label-sm font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-secondary text-[16px]">verified</span>
