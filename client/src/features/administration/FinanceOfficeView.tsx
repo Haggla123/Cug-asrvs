@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import type { AcademicServiceDefinition, DeliveryMethod, AcademicServiceCode } from '../../types';
 import { PAYMENT_SETTINGS } from '../../lib/constants';
+import { TariffStorage } from '../../lib/tariffStorage';
 
 // ---------------------------------------------------------------------------
 // FINANCE OFFICE PORTAL
-// Key Verification Criteria:
-//   1. Reference on statement = Student Index Number
-//   2. Name on account = Sender / Account Name on MoMo or Bank credit
-//   3. Total to send = Document fees + Delivery fee
-//   4. Proof of payment = Uploaded screenshot / deposit slip
+// Key Responsibilities:
+//   1. Tariffs & Fees: Set official prices for all documents and delivery options
+//   2. Statement Reconciliation: Match Index Number (Ref) & Sender Name to clear orders
+//   3. University Accounts: Manage MoMo wallets and Bank accounts for student checkout
 // ---------------------------------------------------------------------------
 
 type ProofStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+type FinanceTab = 'proofs' | 'tariffs' | 'settings';
 
 export interface RequestedDocumentItem {
   title: string;
@@ -22,10 +24,10 @@ export interface RequestedDocumentItem {
 
 export interface PaymentSubmission {
   id: string;
-  referenceNumber: string; // Order reference e.g. CUG-REQ-2026-4821
-  indexNumber: string;     // Primary statement reference
-  applicantName: string;   // Student Legal Name
-  senderAccountName: string; // Name on the MoMo / Bank account used
+  referenceNumber: string;
+  indexNumber: string;
+  applicantName: string;
+  senderAccountName: string;
   programme: string;
   phone: string;
   email: string;
@@ -36,14 +38,12 @@ export interface PaymentSubmission {
   proofType: 'image' | 'pdf';
   proofUrl?: string;
 
-  // What the student requested:
   items: RequestedDocumentItem[];
   deliveryMethod: string;
   deliveryFeeGHS: string;
   documentsSubtotalGHS: string;
-  totalExpectedGHS: string; // Total to match against statement
+  totalExpectedGHS: string;
 
-  // Audit / Clearance:
   amountReceivedGHS?: string;
   rejectionReason?: string;
   verifiedBy?: string;
@@ -184,8 +184,6 @@ const DEMO_SUBMISSIONS: PaymentSubmission[] = [
   },
 ];
 
-type FinanceTab = 'proofs' | 'settings';
-
 const statusBadge = (status: ProofStatus) => {
   if (status === 'APPROVED')
     return (
@@ -210,7 +208,7 @@ const statusBadge = (status: ProofStatus) => {
 };
 
 export const FinanceOfficeView: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<FinanceTab>('proofs');
+  const [activeTab, setActiveTab] = useState<FinanceTab>('tariffs');
   const [submissions, setSubmissions] = useState<PaymentSubmission[]>(DEMO_SUBMISSIONS);
   const [selectedId, setSelectedId] = useState<string | null>(DEMO_SUBMISSIONS[0].id);
   const [showRejectBox, setShowRejectBox] = useState(false);
@@ -218,7 +216,22 @@ export const FinanceOfficeView: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<ProofStatus | 'ALL'>('ALL');
   const [confirmedAmount, setConfirmedAmount] = useState<string>('');
 
-  // Payment settings state
+  // ─── TARIFFS STATE (Category B Configuration Managed by Finance) ───────────
+  const [servicesCatalogue, setServicesCatalogue] = useState<AcademicServiceDefinition[]>(() =>
+    TariffStorage.getServicesCatalogue()
+  );
+  const [deliveryFees, setDeliveryFees] = useState<Record<DeliveryMethod, number>>(() =>
+    TariffStorage.getDeliveryFees()
+  );
+  const [tariffSavedNotification, setTariffSavedNotification] = useState(false);
+  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
+  const [newServiceTitle, setNewServiceTitle] = useState('');
+  const [newServiceCode, setNewServiceCode] = useState<AcademicServiceCode>('ATTESTATION');
+  const [newServicePriceGHS, setNewServicePriceGHS] = useState('40.00');
+  const [newServiceDesc, setNewServiceDesc] = useState('');
+  const [newServiceBadge, setNewServiceBadge] = useState('Standard');
+
+  // ─── PAYMENT RECEIVING ACCOUNTS STATE ──────────────────────────────────────
   const [editingMomo, setEditingMomo] = useState(false);
   const [editingBank, setEditingBank] = useState(false);
   const [momoSettings, setMomoSettings] = useState(PAYMENT_SETTINGS.mobileMoney);
@@ -272,7 +285,83 @@ export const FinanceOfficeView: React.FC = () => {
     setRejectReason('');
   };
 
-  const handleSaveSettings = () => {
+  // ─── TARIFF HANDLERS ───────────────────────────────────────────────────────
+  const handleDocumentPriceChange = (serviceId: string, newPriceGHS: string) => {
+    const parsedGHS = parseFloat(newPriceGHS);
+    const pesewas = isNaN(parsedGHS) ? 0 : Math.round(parsedGHS * 100);
+    setServicesCatalogue((prev) =>
+      prev.map((s) => (s.id === serviceId ? { ...s, basePricePesewas: Math.max(0, pesewas) } : s))
+    );
+  };
+
+  const handleDeliveryFeeChange = (method: DeliveryMethod, newFeeGHS: string) => {
+    const parsedGHS = parseFloat(newFeeGHS);
+    const pesewas = isNaN(parsedGHS) ? 0 : Math.round(parsedGHS * 100);
+    setDeliveryFees((prev) => ({
+      ...prev,
+      [method]: Math.max(0, pesewas),
+    }));
+  };
+
+  const handleSaveAllTariffs = () => {
+    TariffStorage.saveServicesCatalogue(servicesCatalogue);
+    TariffStorage.saveDeliveryFees(deliveryFees);
+    setTariffSavedNotification(true);
+    setTimeout(() => setTariffSavedNotification(false), 4000);
+  };
+
+  const handleResetTariffsToDefault = () => {
+    if (window.confirm('Reset all document prices and delivery fees back to official university defaults?')) {
+      const defaults = TariffStorage.resetDefaults();
+      setServicesCatalogue(defaults.services);
+      setDeliveryFees(defaults.deliveryFees);
+      setTariffSavedNotification(true);
+      setTimeout(() => setTariffSavedNotification(false), 3000);
+    }
+  };
+
+  const handleAddNewService = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newServiceTitle.trim()) return;
+
+    const parsedGHS = parseFloat(newServicePriceGHS);
+    const pesewas = isNaN(parsedGHS) ? 3500 : Math.round(parsedGHS * 100);
+    const newService: AcademicServiceDefinition = {
+      id: `srv_${Date.now()}`,
+      code: newServiceCode,
+      title: newServiceTitle.trim(),
+      description: newServiceDesc.trim() || 'Official registry certified document issued by the Academic Affairs Directorate.',
+      basePricePesewas: pesewas,
+      badgeText: newServiceBadge.trim() || 'Registry Certified',
+      requiresPurpose: newServiceCode === 'ATTESTATION',
+      requiresLevel: newServiceCode === 'TRANSCRIPT',
+      requiresLecturer: newServiceCode === 'RECOMMENDATION',
+      requiresDocument: newServiceCode === 'CERTIFIED_COPY',
+    };
+
+    const updated = [...servicesCatalogue, newService];
+    setServicesCatalogue(updated);
+    TariffStorage.saveServicesCatalogue(updated);
+    setShowAddServiceModal(false);
+    setNewServiceTitle('');
+    setNewServiceDesc('');
+    setTariffSavedNotification(true);
+    setTimeout(() => setTariffSavedNotification(false), 3000);
+  };
+
+  const handleRemoveService = (serviceId: string) => {
+    if (servicesCatalogue.length <= 1) {
+      alert('The catalogue must contain at least one document service.');
+      return;
+    }
+    if (window.confirm('Remove this document from the active registry catalogue?')) {
+      const updated = servicesCatalogue.filter((s) => s.id !== serviceId);
+      setServicesCatalogue(updated);
+      TariffStorage.saveServicesCatalogue(updated);
+    }
+  };
+
+  const handleSaveAccounts = () => {
     setEditingMomo(false);
     setEditingBank(false);
     setSettingsSaved(true);
@@ -284,18 +373,23 @@ export const FinanceOfficeView: React.FC = () => {
 
   return (
     <div className="space-y-5 pb-16">
-      {/* Compact Header Banner */}
+      {/* Header Banner */}
       <div className="bg-cug-green-dark text-white rounded-xl px-5 py-4 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-l-4 border-cug-gold">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-cug-gold/20 border border-cug-gold/40 flex items-center justify-center shrink-0">
             <span className="material-symbols-outlined text-cug-gold text-2xl">account_balance</span>
           </div>
           <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono tracking-wider uppercase text-cug-gold font-bold">
+                Directorate of Finance • Fiapre-Sunyani
+              </span>
+            </div>
             <h1 className="text-title-lg font-serif font-bold text-white tracking-tight leading-tight">
-              Finance Office Verification Portal
+              Finance Office Administration &amp; Tariffs
             </h1>
             <p className="text-white/70 text-[12px]">
-              Match <strong className="text-cug-gold">Index Number (Reference)</strong> &amp; <strong className="text-cug-gold">Name on Account</strong> against university credits to clear requests.
+              Set official document tariffs &amp; courier fees, reconcile student credits against requested services, and manage receiving accounts.
             </p>
           </div>
         </div>
@@ -311,10 +405,11 @@ export const FinanceOfficeView: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 bg-surface-container-low rounded-lg p-1 w-fit border border-outline-variant/40">
+      <div className="flex gap-2 bg-surface-container-low rounded-lg p-1 w-fit border border-outline-variant/40 flex-wrap">
         {[
+          ['tariffs', 'price_change', 'Document Prices & Delivery Fees'],
           ['proofs', 'receipt_long', 'Student Payment Clearances'],
-          ['settings', 'tune', 'University Account Settings (MoMo / Bank)'],
+          ['settings', 'tune', 'Receiving Accounts (MoMo & Bank)'],
         ].map(([tab, icon, label]) => (
           <button
             key={tab}
@@ -333,14 +428,348 @@ export const FinanceOfficeView: React.FC = () => {
       </div>
 
       {/* ════════════════════════════════════════════════════════════════════ */}
-      {/* TAB 1: RECONCILIATION & CLEARANCE                                   */}
+      {/* TAB 1: DOCUMENT PRICES & DELIVERY FEES (MANAGED BY FINANCE)         */}
+      {/* ════════════════════════════════════════════════════════════════════ */}
+      {activeTab === 'tariffs' && (
+        <div className="space-y-6">
+          {/* Notification Banner */}
+          {tariffSavedNotification && (
+            <div className="flex items-center justify-between p-3.5 bg-cug-green/10 border border-cug-green/30 rounded-xl text-cug-green text-body-sm font-semibold shadow-xs animate-fade-in">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-xl">check_circle</span>
+                <span>Official Tariffs Updated! New document prices and delivery fees are now active across the request wizard and landing page.</span>
+              </div>
+              <span className="text-[11px] font-mono uppercase bg-cug-green/20 px-2 py-0.5 rounded text-cug-green font-bold">
+                Live in System
+              </span>
+            </div>
+          )}
+
+          {/* Quick Info Strip */}
+          <div className="bg-surface-container-low/60 rounded-xl p-4 border border-outline-variant/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="space-y-0.5">
+              <h2 className="text-title-sm font-bold text-primary flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-secondary text-[18px]">gavel</span>
+                <span>Official Academic Tariff Schedule (Category B Configuration)</span>
+              </h2>
+              <p className="text-[12px] text-outline">
+                The Finance Directorate establishes and updates all fees charged to students for academic records, letters, certified copies, and courier dispatch.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={handleResetTariffsToDefault}
+                className="px-3 py-1.5 rounded-lg border border-outline-variant text-[11px] font-semibold text-on-surface-variant hover:bg-surface-container transition-colors"
+                title="Restore default university pricing"
+              >
+                Reset to Defaults
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowAddServiceModal(true)}
+                className="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-cug-green/40 text-cug-green font-bold text-[11px] hover:bg-cug-green/5 transition-colors flex items-center gap-1 shadow-2xs"
+              >
+                <span className="material-symbols-outlined text-sm">add</span>
+                <span>Add Document Service</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveAllTariffs}
+                className="px-4 py-1.5 rounded-lg bg-cug-green text-white font-bold text-[12px] hover:bg-cug-green-light active:scale-[0.98] transition-all flex items-center gap-1.5 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">save</span>
+                <span>Save Tariff Changes</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* SECTION A: DOCUMENT PRICES (8 cols) */}
+            <div className="lg:col-span-8 space-y-3">
+              <div className="flex items-center justify-between pb-1 border-b border-outline-variant/40">
+                <h3 className="font-serif font-bold text-primary text-title-md flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-secondary text-lg">description</span>
+                  <span>Academic Document Tariffs ({servicesCatalogue.length} Services)</span>
+                </h3>
+                <span className="text-[11px] text-outline">Unit price charged per single copy</span>
+              </div>
+
+              <div className="space-y-2.5">
+                {servicesCatalogue.map((service) => {
+                  const currentPriceGHS = (service.basePricePesewas / 100).toFixed(2);
+                  return (
+                    <div
+                      key={service.id}
+                      className="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-4 shadow-2xs hover:border-cug-green/40 transition-all space-y-2.5"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-bold text-on-surface text-body-md">
+                              {service.title}
+                            </span>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-surface-container-low text-outline border border-outline-variant/40">
+                              {service.code}
+                            </span>
+                            {service.badgeText && (
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cug-gold/20 text-cug-green-dark border border-cug-gold/40">
+                                {service.badgeText}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-[12px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            {service.description}
+                          </p>
+                        </div>
+
+                        {/* Price Input Block */}
+                        <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+                          <div className="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-lg border border-outline-variant/60">
+                            <span className="text-[11px] font-bold text-primary font-mono">GHS</span>
+                            <input
+                              type="number"
+                              step="1.00"
+                              min="0"
+                              value={currentPriceGHS}
+                              onChange={(e) => handleDocumentPriceChange(service.id, e.target.value)}
+                              className="w-20 bg-surface-container-lowest font-mono font-bold text-sm text-primary px-2 py-0.5 border border-outline-variant rounded focus:border-cug-green text-right"
+                            />
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveService(service.id)}
+                            className="text-outline hover:text-error transition-colors p-1"
+                            title="Remove document from catalogue"
+                          >
+                            <span className="material-symbols-outlined text-lg">delete</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Detail tags */}
+                      <div className="flex items-center gap-3 pt-1 border-t border-dashed border-outline-variant/40 text-[11px] text-outline">
+                        <span className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[13px] text-cug-green">check_circle</span>
+                          <span>In Pesewas: <strong className="font-mono text-tertiary">{service.basePricePesewas} pesewas</strong></span>
+                        </span>
+                        {service.requiresLevel && <span>• Degree Level Selection Required</span>}
+                        {service.requiresPurpose && <span>• Purpose Statement Required</span>}
+                        {service.requiresDocument && <span>• Certificate Upload Required</span>}
+                        {service.requiresLecturer && <span>• Lecturer Nomination Required</span>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* SECTION B: DELIVERY & COURIER FEES (4 cols) */}
+            <div className="lg:col-span-4 space-y-3">
+              <div className="pb-1 border-b border-outline-variant/40">
+                <h3 className="font-serif font-bold text-primary text-title-md flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-secondary text-lg">local_shipping</span>
+                  <span>Delivery &amp; Courier Fees</span>
+                </h3>
+                <span className="text-[11px] text-outline">Fulfillment charges added to order total</span>
+              </div>
+
+              <div className="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-4 shadow-2xs space-y-3.5">
+                {[
+                  {
+                    method: 'DOMESTIC_COURIER' as DeliveryMethod,
+                    title: 'Ghana Post EMS (Domestic)',
+                    desc: 'Nationwide dispatch to all 16 regions',
+                    icon: 'local_post_office',
+                    fee: deliveryFees.DOMESTIC_COURIER,
+                  },
+                  {
+                    method: 'INTERNATIONAL_COURIER' as DeliveryMethod,
+                    title: 'DHL Express (International)',
+                    desc: 'Tracked worldwide courier dispatch',
+                    icon: 'flight_takeoff',
+                    fee: deliveryFees.INTERNATIONAL_COURIER,
+                  },
+                  {
+                    method: 'EMAIL' as DeliveryMethod,
+                    title: 'Electronic Official PDF',
+                    desc: 'Direct email delivery to recipient',
+                    icon: 'mail',
+                    fee: deliveryFees.EMAIL,
+                  },
+                  {
+                    method: 'SELF_PICKUP' as DeliveryMethod,
+                    title: 'Self-Pickup (Fiapre Campus)',
+                    desc: 'Academic Affairs Office Desk',
+                    icon: 'storefront',
+                    fee: deliveryFees.SELF_PICKUP,
+                  },
+                  {
+                    method: 'PROXY_PICKUP' as DeliveryMethod,
+                    title: 'Authorized Proxy Pickup',
+                    desc: 'Representative collection in person',
+                    icon: 'group',
+                    fee: deliveryFees.PROXY_PICKUP,
+                  },
+                ].map((item) => (
+                  <div key={item.method} className="space-y-1 pb-3 border-b border-outline-variant/40 last:border-b-0 last:pb-0">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-body-sm text-tertiary flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[16px] text-secondary">{item.icon}</span>
+                        <span>{item.title}</span>
+                      </span>
+                      <div className="flex items-center gap-1 bg-surface-container-low px-2 py-0.5 rounded border border-outline-variant/60">
+                        <span className="text-[10px] font-bold text-primary font-mono">GHS</span>
+                        <input
+                          type="number"
+                          step="1.00"
+                          min="0"
+                          value={(item.fee / 100).toFixed(2)}
+                          onChange={(e) => handleDeliveryFeeChange(item.method, e.target.value)}
+                          className="w-16 bg-surface-container-lowest font-mono font-bold text-xs text-primary px-1.5 py-0.5 border border-outline-variant rounded focus:border-cug-green text-right"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-outline pl-5">{item.desc}</p>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={handleSaveAllTariffs}
+                  className="w-full mt-2 py-2 px-3 rounded-lg bg-cug-green text-white font-bold text-label-sm hover:bg-cug-green-light active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 shadow-2xs"
+                >
+                  <span className="material-symbols-outlined text-base">save</span>
+                  <span>Apply All Pricing Changes</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* ADD DOCUMENT SERVICE MODAL */}
+          {showAddServiceModal && (
+            <div className="fixed inset-0 z-50 bg-tertiary/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in">
+              <div className="bg-surface-container-lowest rounded-2xl max-w-md w-full p-6 shadow-2xl border border-outline-variant/80 space-y-4">
+                <div className="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+                  <h3 className="font-serif font-bold text-primary text-title-md flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-secondary">add_circle</span>
+                    <span>Add New Document Tariff</span>
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => setShowAddServiceModal(false)}
+                    className="text-outline hover:text-on-surface"
+                  >
+                    <span className="material-symbols-outlined text-xl">close</span>
+                  </button>
+                </div>
+
+                <form onSubmit={handleAddNewService} className="space-y-3 text-body-sm">
+                  <div>
+                    <label className="block text-[11px] font-bold text-on-surface mb-1 uppercase tracking-wider">
+                      Document Title *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newServiceTitle}
+                      onChange={(e) => setNewServiceTitle(e.target.value)}
+                      placeholder="e.g. Visa Attestation Letter"
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-on-surface focus:border-cug-green"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-bold text-on-surface mb-1 uppercase tracking-wider">
+                        Document Code
+                      </label>
+                      <select
+                        value={newServiceCode}
+                        onChange={(e) => setNewServiceCode(e.target.value as AcademicServiceCode)}
+                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-2.5 py-2 font-mono text-xs focus:border-cug-green"
+                      >
+                        <option value="TRANSCRIPT">TRANSCRIPT</option>
+                        <option value="ENGLISH_PROFICIENCY">ENGLISH_PROFICIENCY</option>
+                        <option value="ATTESTATION">ATTESTATION</option>
+                        <option value="CERTIFIED_COPY">CERTIFIED_COPY</option>
+                        <option value="RECOMMENDATION">RECOMMENDATION</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-on-surface mb-1 uppercase tracking-wider">
+                        Price (GHS) *
+                      </label>
+                      <input
+                        type="number"
+                        step="0.50"
+                        min="0"
+                        required
+                        value={newServicePriceGHS}
+                        onChange={(e) => setNewServicePriceGHS(e.target.value)}
+                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 font-mono font-bold text-on-surface focus:border-cug-green"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-on-surface mb-1 uppercase tracking-wider">
+                      Badge Text
+                    </label>
+                    <input
+                      type="text"
+                      value={newServiceBadge}
+                      onChange={(e) => setNewServiceBadge(e.target.value)}
+                      placeholder="e.g. Seal Included, Express"
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-on-surface focus:border-cug-green text-xs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-on-surface mb-1 uppercase tracking-wider">
+                      Official Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={newServiceDesc}
+                      onChange={(e) => setNewServiceDesc(e.target.value)}
+                      placeholder="Brief registry description of the certified document..."
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-on-surface focus:border-cug-green text-xs resize-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-outline-variant/60">
+                    <button
+                      type="button"
+                      onClick={() => setShowAddServiceModal(false)}
+                      className="px-3 py-1.5 rounded-lg border border-outline-variant text-[12px] font-medium text-outline hover:bg-surface-container"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-4 py-1.5 rounded-lg bg-cug-green text-white font-bold text-[12px] hover:bg-cug-green-light"
+                    >
+                      Add to Tariff Schedule
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ════════════════════════════════════════════════════════════════════ */}
+      {/* TAB 2: STUDENT PAYMENT CLEARANCES & RECONCILIATION                  */}
       {/* ════════════════════════════════════════════════════════════════════ */}
       {activeTab === 'proofs' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-
           {/* Left Column (5 cols): Submissions List */}
           <div className="lg:col-span-5 space-y-3">
-            {/* Filter buttons */}
             <div className="flex items-center justify-between gap-1.5 pb-1">
               <span className="text-[11px] font-bold text-outline uppercase tracking-wider">Queue:</span>
               <div className="flex gap-1">
@@ -361,7 +790,6 @@ export const FinanceOfficeView: React.FC = () => {
               </div>
             </div>
 
-            {/* List */}
             <div className="space-y-2">
               {filtered.map((sub) => {
                 const isSelected = selectedId === sub.id;
@@ -377,7 +805,6 @@ export const FinanceOfficeView: React.FC = () => {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        {/* Index Number = Primary Reference */}
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="font-mono font-bold text-primary text-[12px] bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant/50">
                             Ref: {sub.indexNumber}
@@ -410,8 +837,6 @@ export const FinanceOfficeView: React.FC = () => {
           <div className="lg:col-span-7">
             {selected ? (
               <div className="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-4 sm:p-5 shadow-xs space-y-3.5">
-
-                {/* 1. Header: Reference & Identity */}
                 <div className="flex items-start justify-between gap-2 border-b border-outline-variant/50 pb-2.5">
                   <div>
                     <div className="flex items-center gap-2">
@@ -430,7 +855,7 @@ export const FinanceOfficeView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 2. CRITICAL STATEMENT VERIFICATION STRIP (Compact) */}
+                {/* CRITICAL STATEMENT VERIFICATION STRIP */}
                 <div className="bg-cug-green/5 border-2 border-cug-green/30 rounded-lg p-3">
                   <div className="grid grid-cols-3 gap-2 text-left">
                     <div>
@@ -462,7 +887,7 @@ export const FinanceOfficeView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 3. REQUESTED SERVICES & DELIVERY (Compact list instead of tall table) */}
+                {/* REQUESTED SERVICES & DELIVERY */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-label-sm font-bold text-primary">
                     <span className="flex items-center gap-1">
@@ -495,10 +920,9 @@ export const FinanceOfficeView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 4. PAYMENT PROOF & CLEARANCE ACTIONS (Inline & Compact) */}
+                {/* PAYMENT PROOF & CLEARANCE ACTIONS */}
                 <div className="pt-1 border-t border-outline-variant/50 space-y-3">
                   <div className="flex items-center justify-between">
-                    {/* Compact proof button */}
                     <div className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-secondary text-[18px]">receipt</span>
                       <span className="text-label-sm font-bold text-primary">Uploaded Proof:</span>
@@ -520,7 +944,6 @@ export const FinanceOfficeView: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Actions when PENDING */}
                   {selected.status === 'PENDING' && (
                     <div className="bg-surface-container-low/40 rounded-lg p-2.5 border border-outline-variant/60 space-y-2">
                       <div className="flex items-center justify-between gap-2 flex-wrap">
@@ -600,7 +1023,6 @@ export const FinanceOfficeView: React.FC = () => {
                     </div>
                   )}
                 </div>
-
               </div>
             ) : (
               <div className="bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center h-48 text-center p-4 text-on-surface-variant">
@@ -608,19 +1030,18 @@ export const FinanceOfficeView: React.FC = () => {
               </div>
             )}
           </div>
-
         </div>
       )}
 
       {/* ════════════════════════════════════════════════════════════════════ */}
-      {/* TAB 2: UNIVERSITY ACCOUNT SETTINGS                                  */}
+      {/* TAB 3: RECEIVING ACCOUNTS (MOMO & BANK)                             */}
       {/* ════════════════════════════════════════════════════════════════════ */}
       {activeTab === 'settings' && (
         <div className="space-y-4 max-w-3xl">
           {settingsSaved && (
             <div className="flex items-center gap-2 p-3 bg-cug-green/10 border border-cug-green/30 rounded-lg text-cug-green font-semibold text-body-sm">
               <span className="material-symbols-outlined text-base">check_circle</span>
-              Payment details updated and saved.
+              Payment receiving accounts updated and saved.
             </div>
           )}
 
@@ -804,11 +1225,11 @@ export const FinanceOfficeView: React.FC = () => {
           {(editingMomo || editingBank) && (
             <button
               type="button"
-              onClick={handleSaveSettings}
+              onClick={handleSaveAccounts}
               className="px-6 py-2 rounded-lg bg-cug-green text-white font-bold text-label-sm hover:bg-cug-green-light transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <span className="material-symbols-outlined text-base">save</span>
-              <span>Save Payment Details</span>
+              <span>Save Receiving Accounts</span>
             </button>
           )}
         </div>
