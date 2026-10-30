@@ -5,6 +5,7 @@ interface TopAppBarProps {
   onNavigateHome: () => void;
   onNavigateTrack: () => void;
   onNavigateWizard: () => void;
+  onNavigateFinance?: () => void;
   activeRoute?: string;
 }
 
@@ -13,6 +14,7 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
   onNavigateHome,
   onNavigateTrack,
   onNavigateWizard,
+  onNavigateFinance,
   activeRoute = 'home'
 }) => {
   return (
@@ -86,6 +88,20 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
           >
             Track Status
           </button>
+          {onNavigateFinance && (
+            <button
+              type="button"
+              onClick={onNavigateFinance}
+              className={`px-3 py-1.5 rounded-lg text-label-md font-label-md font-medium transition-colors flex items-center gap-1.5 ${
+                activeRoute === 'finance'
+                  ? 'bg-cug-gold text-cug-green-deep font-semibold'
+                  : 'text-white/85 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[17px]">account_balance</span>
+              <span>Finance Office</span>
+            </button>
+          )}
         </nav>
 
         {/* Right: Security Pill & Quick Action */}

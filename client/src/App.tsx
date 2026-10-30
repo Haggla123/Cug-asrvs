@@ -57,6 +57,7 @@ export const App: React.FC = () => {
         onNavigateHome={handleNavigateHome}
         onNavigateTrack={() => handleNavigateTrack()}
         onNavigateWizard={handleNavigateWizard}
+        onNavigateFinance={handleNavigateFinance}
         activeRoute={activeRoute}
       />
 
@@ -110,7 +111,7 @@ export const App: React.FC = () => {
         )}
 
         {activeRoute === 'finance' && (
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+          <div className="max-w-[1400px] mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
             <FinanceOfficeView />
           </div>
         )}
