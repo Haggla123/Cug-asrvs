@@ -133,13 +133,13 @@ export const PAYMENT_SETTINGS = {
       network: 'MTN MoMo',
       accountNumber: '024 XXX XXXX',
       accountName: 'Catholic University of Ghana – Registry',
-      instructions: 'Dial *170# → Send Money → type the number above → enter the exact amount → use your reference as the description.',
+      instructions: 'Dial *170# → Send Money → enter number above → enter exact amount → Use your Student Index Number as the reference.',
     },
     {
       network: 'Telecel Cash',
       accountNumber: '027 XXX XXXX',
       accountName: 'Catholic University of Ghana – Registry',
-      instructions: 'Dial *700# → Send Money → enter the number above → enter the exact amount.',
+      instructions: 'Dial *700# → Send Money → enter number above → enter exact amount → Use your Student Index Number as reference.',
     },
   ],
   bankTransfer: {
@@ -149,6 +149,6 @@ export const PAYMENT_SETTINGS = {
     accountNumber: '1234567890',
     sortCode: '040101',
     swiftCode: 'GHCBGHAC',
-    instructions: 'Make a direct bank deposit or online transfer. Use your full name and student index number as the reference/narration.',
+    instructions: 'Direct bank deposit or transfer. You MUST use your Student Index Number as the reference / narration.',
   },
 };
