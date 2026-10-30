@@ -33,7 +33,10 @@ EMAIL_PASS=<secret-manager-reference>
 
 Never commit real credentials or use shared/example secrets in production. The variables above are documentation placeholders; this repository does not currently read or validate them because the server is not implemented.
 
-## 2. Production Checklist
+## 2. Production Checklist (Target State)
+
+The following checklist describes the target production setup and applies only after the backend is implemented.
+
 1. PostgreSQL database provisioned with SSL connections enforced.
 2. Prisma database migrations executed: `npx prisma migrate deploy`.
 3. Seed data initialized: `npx prisma db seed`.
@@ -47,4 +50,4 @@ Never commit real credentials or use shared/example secrets in production. The v
 
 This checkout is a frontend prototype and is **not ready for production deployment**. The `server/` workspace described in the architecture and API documents is absent. The client has no production API base URL, database, authentication, payment gateway, consent-file upload, registry tracking, health check, or server-side authorization. Payment, verification, and status lookup are deliberately unavailable in the UI until those services are implemented and verified. The staff screen is a local simulation and provides no access control; it must not be used to process real records.
 
-Before deployment, implement and security-review the backend and database, connect the client to those services, remove local-only handling of applicant personal data, configure and validate production secrets, implement staff authentication and authorization, integrate a real payment provider with signed idempotent webhooks, and run authenticated end-to-end tests against a non-production environment. Then document backup, migration, monitoring, and rollback procedures. No live infrastructure was changed by this audit.
+Before deployment, implement and security-review the backend and database, connect the client to those services, remove local-only handling of applicant personal data, configure and validate production secrets, implement staff authentication and authorization, integrate a real payment provider with signed idempotent webhooks, and run authenticated end-to-end tests against a non-production environment. Then document backup, migration, monitoring, and rollback procedures.

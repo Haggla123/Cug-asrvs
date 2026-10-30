@@ -16,7 +16,7 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
   activeRoute = 'home'
 }) => {
   return (
-    <header className="sticky top-0 z-40 w-full bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/60 shadow-xs">
+    <header className="sticky top-0 z-40 w-full bg-cug-green-dark text-white border-b border-cug-gold/70 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Left: Drawer Toggle & Brand */}
         <div className="flex items-center gap-3">
@@ -24,14 +24,16 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             type="button"
             onClick={onOpenDrawer}
             aria-label="Open Navigation Menu"
-            className="p-2 -ml-2 text-primary hover:bg-surface-container-low rounded-lg transition-colors focus:ring-2 focus:ring-secondary/50"
+            className="p-2 -ml-2 text-white hover:bg-white/10 rounded-lg transition-colors focus:ring-2 focus:ring-cug-gold/70"
           >
             <span className="material-symbols-outlined text-[24px]">menu</span>
           </button>
 
-          <div 
+          <button
+            type="button"
             onClick={onNavigateHome}
-            className="flex items-center gap-2.5 cursor-pointer select-none group"
+            aria-label="Catholic University of Ghana home"
+            className="flex items-center gap-2.5 cursor-pointer select-none group text-left"
           >
             <img 
               src="/cug-logo.png" 
@@ -39,14 +41,14 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
               className="w-10 h-10 object-contain group-hover:scale-105 transition-transform shrink-0 drop-shadow-xs" 
             />
             <div>
-              <span className="text-title-lg font-serif font-bold tracking-tight text-primary leading-none block">
-                CUG ASRVS
+              <span className="text-[13px] sm:text-title-md font-serif font-bold tracking-tight text-white leading-tight block">
+                Catholic University of Ghana
               </span>
-              <span className="text-label-sm font-label-sm text-outline block leading-none mt-0.5">
-                Registry Gateway • Fiapre
+              <span className="text-[10px] sm:text-label-sm font-label-sm text-white/75 block leading-tight mt-0.5">
+                Academic Services Request &amp; Verification System
               </span>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Center: Desktop Navigation Links */}
@@ -56,8 +58,8 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             onClick={onNavigateHome}
             className={`px-3 py-1.5 rounded-lg text-label-md font-label-md font-medium transition-colors ${
               activeRoute === 'home'
-                ? 'bg-surface-container text-primary font-semibold'
-                : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
+                ? 'bg-cug-gold text-cug-green-deep font-semibold'
+                : 'text-white/85 hover:text-white hover:bg-white/10'
             }`}
           >
             Catalogue
@@ -67,8 +69,8 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             onClick={onNavigateWizard}
             className={`px-3 py-1.5 rounded-lg text-label-md font-label-md font-medium transition-colors ${
               activeRoute === 'wizard'
-                ? 'bg-surface-container text-primary font-semibold'
-                : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
+                ? 'bg-cug-gold text-cug-green-deep font-semibold'
+                : 'text-white/85 hover:text-white hover:bg-white/10'
             }`}
           >
             New Request
@@ -78,8 +80,8 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
             onClick={onNavigateTrack}
             className={`px-3 py-1.5 rounded-lg text-label-md font-label-md font-medium transition-colors ${
               activeRoute === 'track'
-                ? 'bg-surface-container text-primary font-semibold'
-                : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
+                ? 'bg-cug-gold text-cug-green-deep font-semibold'
+                : 'text-white/85 hover:text-white hover:bg-white/10'
             }`}
           >
             Track Status
@@ -88,11 +90,11 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
 
         {/* Right: Security Pill & Quick Action */}
         <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low rounded-lg border border-outline-variant/60">
-            <span className="material-symbols-outlined text-secondary text-sm">
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-white/10 rounded-lg border border-white/20">
+            <span className="material-symbols-outlined text-cug-gold text-sm">
               verified_user
             </span>
-            <span className="text-label-sm font-label-sm text-on-surface font-semibold">
+            <span className="text-label-sm font-label-sm text-white font-semibold">
               Official Portal
             </span>
           </div>
@@ -100,9 +102,9 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
           <button
             type="button"
             onClick={onNavigateTrack}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-primary hover:bg-surface-container-high transition-colors text-label-md font-label-md font-medium"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-transparent border border-cug-gold/80 text-white hover:bg-white/10 transition-colors text-label-md font-label-md font-medium"
           >
-            <span className="material-symbols-outlined text-[17px] text-secondary">timeline</span>
+            <span className="material-symbols-outlined text-[17px] text-cug-gold">timeline</span>
             <span className="text-label-sm font-semibold">Track</span>
           </button>
         </div>

@@ -8,6 +8,7 @@ interface NavigationDrawerProps {
   onNavigateTrack: () => void;
   onNavigateVerify: () => void;
   onNavigateStaffDemo: () => void;
+  onNavigateFinance: () => void;
   activeRoute: string;
 }
 
@@ -19,6 +20,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   onNavigateTrack,
   onNavigateVerify,
   onNavigateStaffDemo,
+  onNavigateFinance,
   activeRoute
 }) => {
   if (!isOpen) return null;
@@ -135,6 +137,19 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
             >
               <span className="material-symbols-outlined text-[20px]">admin_panel_settings</span>
               <span>Staff Processing Portal</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => { onNavigateFinance(); onClose(); }}
+              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-lg text-left text-label-md font-label-md transition-colors ${
+                activeRoute === 'finance'
+                  ? 'bg-primary-container text-white font-semibold shadow-xs'
+                  : 'text-on-surface-variant hover:bg-surface-container-low hover:text-primary'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[20px]">account_balance</span>
+              <span>Finance Office Portal</span>
             </button>
           </div>
         </nav>

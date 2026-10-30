@@ -7,8 +7,9 @@ import { RequestWizardPage } from './pages/RequestWizardPage';
 import { TrackingPage } from './pages/TrackingPage';
 import { VerificationView } from './features/verification/VerificationView';
 import { StaffDemoView } from './features/administration/StaffDemoView';
+import { FinanceOfficeView } from './features/administration/FinanceOfficeView';
 
-type AppRoute = 'home' | 'wizard' | 'track' | 'verify' | 'staff';
+type AppRoute = 'home' | 'wizard' | 'track' | 'verify' | 'staff' | 'finance';
 
 export const App: React.FC = () => {
   const [activeRoute, setActiveRoute] = useState<AppRoute>('home');
@@ -43,6 +44,11 @@ export const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateFinance = () => {
+    setActiveRoute('finance');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-on-surface font-sans selection:bg-secondary-fixed selection:text-on-secondary-fixed">
       {/* Institutional Top App Bar */}
@@ -63,6 +69,7 @@ export const App: React.FC = () => {
         onNavigateTrack={() => handleNavigateTrack()}
         onNavigateVerify={handleNavigateVerify}
         onNavigateStaffDemo={handleNavigateStaffDemo}
+        onNavigateFinance={handleNavigateFinance}
         activeRoute={activeRoute}
       />
 
@@ -99,6 +106,12 @@ export const App: React.FC = () => {
         {activeRoute === 'staff' && (
           <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-6">
             <StaffDemoView />
+          </div>
+        )}
+
+        {activeRoute === 'finance' && (
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+            <FinanceOfficeView />
           </div>
         )}
       </main>

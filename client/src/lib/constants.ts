@@ -120,3 +120,35 @@ export const DELIVERY_FEES: Record<DeliveryMethod, number> = {
 };
 
 export const PICKUP_LOCATION_DEFAULT = 'Academic Affairs Office Desk, Fiapre-Sunyani Campus';
+
+// ---------------------------------------------------------------------------
+// PAYMENT SETTINGS — Category B (Finance Office configurable)
+// These are the manual payment details displayed to students during checkout.
+// In the live system these values will be stored in the database and managed
+// through the Finance Office portal.  The defaults below are placeholders.
+// ---------------------------------------------------------------------------
+export const PAYMENT_SETTINGS = {
+  mobileMoney: [
+    {
+      network: 'MTN MoMo',
+      accountNumber: '024 XXX XXXX',
+      accountName: 'Catholic University of Ghana – Registry',
+      instructions: 'Dial *170# → Send Money → type the number above → enter the exact amount → use your reference as the description.',
+    },
+    {
+      network: 'Telecel Cash',
+      accountNumber: '027 XXX XXXX',
+      accountName: 'Catholic University of Ghana – Registry',
+      instructions: 'Dial *700# → Send Money → enter the number above → enter the exact amount.',
+    },
+  ],
+  bankTransfer: {
+    bankName: 'GCB Bank Ltd',
+    branch: 'Sunyani Branch',
+    accountName: 'Catholic University of Ghana',
+    accountNumber: '1234567890',
+    sortCode: '040101',
+    swiftCode: 'GHCBGHAC',
+    instructions: 'Make a direct bank deposit or online transfer. Use your full name and student index number as the reference/narration.',
+  },
+};

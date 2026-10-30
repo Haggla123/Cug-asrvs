@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { INITIAL_SERVICES_CATALOGUE } from '../lib/constants';
 import { formatPesewas } from '../lib/currency';
 
@@ -13,138 +13,50 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onTrackOrder,
   onVerifyCredentials
 }) => {
-  const [quickRef, setQuickRef] = useState('');
-  const [quickIndex, setQuickIndex] = useState('');
-
-  const handleQuickTrack = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (quickRef.trim()) {
-      onTrackOrder(quickRef.trim(), quickIndex.trim());
-    }
-  };
-
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-10 pb-12">
       {/* HERO SECTION — glassy campus-photo background */}
-      <section className="relative overflow-hidden border-b border-white/20 min-h-[377px] sm:min-h-[429px] flex items-center">
-
-        {/* 1. Campus photo layer */}
+      <section className="relative isolate overflow-hidden border-b border-cug-gold/70 min-h-[410px] sm:min-h-[470px] flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ backgroundImage: "url('/cug-campus.jpg')" }}
           aria-hidden="true"
         />
+        <div className="absolute inset-0 bg-cug-green/15" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cug-green-dark/55 via-cug-green/30 to-cug-green-deep/40" aria-hidden="true" />
 
-        {/* 2. Very light dark tint — lets the photo breathe */}
-        <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
-
-        {/* 3. Subtle green colour cast from bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-cug-green-dark/60 via-transparent to-transparent" aria-hidden="true" />
-
-        {/* 4. Glass content card */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-          <div className="bg-white/10 backdrop-blur-md border border-white/25 rounded-3xl px-6 py-10 sm:px-10 sm:py-14 shadow-2xl text-center space-y-7">
-
-            {/* Crest + kicker */}
-            <div className="flex flex-col items-center gap-3">
-              <img
-                src="/cug-logo.png"
-                alt="Catholic University of Ghana Crest"
-                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] mx-auto"
-              />
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cug-gold/20 backdrop-blur-sm border border-cug-gold/50 text-cug-gold text-label-sm font-bold uppercase tracking-wider shadow-sm">
-                <span className="material-symbols-outlined text-sm">account_balance</span>
-                <span>Office of the Registrar • Fiapre-Sunyani</span>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="max-w-5xl mx-auto rounded-2xl border border-white/25 bg-cug-green-dark/20 p-5 sm:p-8 backdrop-blur-md shadow-2xl">
+            <div className="space-y-4 sm:space-y-5 sm:text-center">
+              <div className="inline-flex items-center gap-2 text-cug-gold text-label-sm font-bold uppercase tracking-wider sm:justify-center">
+                <span className="h-px w-6 bg-cug-gold" />
+                <span>Office of the Registrar</span>
+              </div>
+              <h1 className="max-w-4xl sm:mx-auto text-[32px] leading-[1.08] sm:text-display-lg font-serif font-bold text-white tracking-tight">
+                Order your academic documents without queuing at the office.
+              </h1>
+              <p className="max-w-2xl sm:mx-auto text-body-md sm:text-body-lg text-white/90 leading-relaxed">
+                Choose the documents you need and prepare a request draft. Online submission and payment are not yet available in this prototype.
+              </p>
+              <div className="flex flex-col min-[420px]:flex-row items-stretch min-[420px]:items-center gap-3 pt-1 sm:justify-center">
+                <button
+                  type="button"
+                  onClick={onStartRequest}
+                  className="w-full min-[420px]:w-auto px-6 py-3 rounded-lg bg-cug-gold text-cug-green-deep hover:bg-cug-gold-hover active:scale-[0.98] font-title-sm font-bold shadow-lg transition-all flex items-center justify-center gap-2"
+                >
+                  <span>Start a request draft</span>
+                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onTrackOrder()}
+                  className="w-full min-[420px]:w-auto px-6 py-3 rounded-lg border border-white/70 bg-white/10 text-white font-title-sm font-semibold hover:bg-white/20 transition-all flex items-center justify-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-lg">timeline</span>
+                  <span>Track a request</span>
+                </button>
               </div>
             </div>
-
-            {/* Headline — white with strong text shadow for pop */}
-            <h1
-              className="text-display-lg-mobile sm:text-display-lg font-serif font-bold text-white tracking-tight leading-tight max-w-3xl mx-auto"
-              style={{ textShadow: '0 2px 12px rgba(0,0,0,0.55)' }}
-            >
-              Academic Services Request &amp; Verification System
-            </h1>
-
-            {/* Subtitle — off-white, still clearly readable */}
-            <p
-              className="text-body-lg font-body-lg text-white/90 max-w-2xl mx-auto leading-relaxed"
-              style={{ textShadow: '0 1px 6px rgba(0,0,0,0.45)' }}
-            >
-              Order official academic transcripts, English proficiency certifications, introductory letters, and verified certificate copies without an account. Track your requests in real-time from financial clearance through registrar sealing.
-            </p>
-
-            {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
-              <button
-                type="button"
-                onClick={onStartRequest}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-cug-gold text-cug-green-dark hover:bg-cug-gold-hover active:scale-[0.98] font-title-sm font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2.5"
-              >
-                <span className="material-symbols-outlined text-xl">add_circle</span>
-                <span>Start New Document Request</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => onTrackOrder()}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl border-2 border-white/60 bg-white/15 backdrop-blur-sm text-white font-title-sm font-semibold hover:bg-white/25 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
-                style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
-              >
-                <span className="material-symbols-outlined text-xl">timeline</span>
-                <span>Track Existing Order</span>
-              </button>
-            </div>
-
-            {/* Quick Tracking Search Box — opaque card inside the glass card */}
-            <div className="max-w-2xl mx-auto pt-2">
-              <div className="bg-white/95 backdrop-blur-sm p-3.5 sm:p-4 rounded-2xl border border-white/80 shadow-xl">
-                <div className="text-left mb-2.5 px-1 flex items-center justify-between">
-                  <span className="text-label-sm font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-secondary text-[16px]">verified</span>
-                    <span>Quick Request Status Lookup</span>
-                  </span>
-                  <span className="text-[11px] text-outline">No login required</span>
-                </div>
-
-                <form onSubmit={handleQuickTrack} className="flex flex-col sm:flex-row items-stretch gap-2.5">
-                  <div className="w-full sm:flex-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
-                      <span className="material-symbols-outlined text-lg">search</span>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Order Reference (e.g. CUG-REQ-2026-8941)"
-                      value={quickRef}
-                      onChange={e => setQuickRef(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary focus:bg-surface-container-lowest transition-colors text-on-surface"
-                    />
-                  </div>
-
-                  <div className="w-full sm:w-52 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
-                      <span className="material-symbols-outlined text-lg">badge</span>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Index / Phone"
-                      value={quickIndex}
-                      onChange={e => setQuickIndex(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-md font-mono focus:border-primary focus:bg-surface-container-lowest transition-colors text-on-surface"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-cug-green text-white hover:bg-cug-green-light active:scale-[0.98] transition-all font-semibold text-label-md shrink-0 flex items-center justify-center gap-2 shadow-sm"
-                  >
-                    <span>Track</span>
-                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </button>
-                </form>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
