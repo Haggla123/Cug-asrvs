@@ -6,7 +6,8 @@ import type {
   DeliveryDetails, 
   DeliveryMethod 
 } from '../../types';
-import { INITIAL_SERVICES_CATALOGUE, DELIVERY_FEES, PICKUP_LOCATION_DEFAULT } from '../../lib/constants';
+import { PICKUP_LOCATION_DEFAULT } from '../../lib/constants';
+import { TariffStorage } from '../../lib/tariffStorage';
 import { formatPesewas, calculateOrderTotals } from '../../lib/currency';
 import { CopyCounter } from '../../components/ui/CopyCounter';
 
@@ -32,11 +33,21 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
   onContinue,
   onBack
 }) => {
+  // Official Tariffs configured by Finance Office
+  const [servicesCatalogue] = useState(() => TariffStorage.getServicesCatalogue());
+  const [deliveryFees] = useState(() => TariffStorage.getDeliveryFees());
+
   // Selected Services State
   const [selectedItems, setSelectedItems] = useState<SelectedServiceItem[]>(() => {
     if (initialItems && initialItems.length > 0) return initialItems;
     // Default: Transcript selected with 1 copy
-    const transcriptDef = INITIAL_SERVICES_CATALOGUE[0];
+    const transcriptDef = servicesCatalogue[0] || {
+      id: 'srv_transcript',
+      code: 'TRANSCRIPT',
+      title: 'Official Academic Transcript',
+      basePricePesewas: 5000,
+      description: ''
+    };
     return [
       {
         serviceId: transcriptDef.id,
@@ -65,7 +76,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
   const [deliveryData, setDeliveryData] = useState<DeliveryDetails>(
     initialDelivery || {
       method: 'SELF_PICKUP',
-      feePesewas: DELIVERY_FEES.SELF_PICKUP
+      feePesewas: deliveryFees.SELF_PICKUP
     }
   );
 
@@ -74,7 +85,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
   // Calculations
   const { totalPesewas } = calculateOrderTotals(
     selectedItems.map(item => ({ unitPricePesewas: item.unitPricePesewas, quantity: item.quantity })),
-    DELIVERY_FEES[deliveryMethod]
+    deliveryFees[deliveryMethod]
   );
 
   // Toggle Service Selection
@@ -85,7 +96,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
       setSelectedItems(selectedItems.filter(i => i.serviceId !== serviceId));
     } else {
       // Select: Initialize with quantity 1
-      const def = INITIAL_SERVICES_CATALOGUE.find(s => s.id === serviceId);
+      const def = servicesCatalogue.find(s => s.id === serviceId);
       if (def) {
         const newItem: SelectedServiceItem = {
           serviceId: def.id,
@@ -145,7 +156,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
     setDeliveryData(prev => ({
       ...prev,
       method: newMethod,
-      feePesewas: DELIVERY_FEES[newMethod]
+      feePesewas: deliveryFees[newMethod]
     }));
   };
 
@@ -201,7 +212,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
         delivery: {
           ...deliveryData,
           method: deliveryMethod,
-          feePesewas: DELIVERY_FEES[deliveryMethod]
+          feePesewas: deliveryFees[deliveryMethod]
         }
       });
     } else {
@@ -250,7 +261,7 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
           )}
 
           <div className="space-y-3">
-            {INITIAL_SERVICES_CATALOGUE.map((service) => {
+            {servicesCatalogue.map((service) => {
               const selectedItem = selectedItems.find(i => i.serviceId === service.id);
               const isSelected = !!selectedItem;
 
@@ -606,35 +617,35 @@ export const ServicesDeliveryStep: React.FC<ServicesDeliveryStepProps> = ({
                 method: 'SELF_PICKUP' as const,
                 title: 'Self-Pickup (Fiapre Campus)',
                 desc: PICKUP_LOCATION_DEFAULT,
-                fee: DELIVERY_FEES.SELF_PICKUP,
+                fee: deliveryFees.SELF_PICKUP,
                 icon: 'storefront'
               },
               {
                 method: 'PROXY_PICKUP' as const,
                 title: 'Authorized Proxy Pickup',
                 desc: 'Nominate a trusted representative to collect in person at Fiapre Campus',
-                fee: DELIVERY_FEES.PROXY_PICKUP,
+                fee: deliveryFees.PROXY_PICKUP,
                 icon: 'group'
               },
               {
                 method: 'EMAIL' as const,
                 title: 'Electronic Official PDF (Email Delivery)',
                 desc: 'Digital certified copy transmitted directly to verified recipient email',
-                fee: DELIVERY_FEES.EMAIL,
+                fee: deliveryFees.EMAIL,
                 icon: 'mail'
               },
               {
                 method: 'DOMESTIC_COURIER' as const,
                 title: 'Ghana Post EMS (Domestic Courier)',
                 desc: 'Secure nationwide delivery across all 16 regions of Ghana',
-                fee: DELIVERY_FEES.DOMESTIC_COURIER,
+                fee: deliveryFees.DOMESTIC_COURIER,
                 icon: 'local_post_office'
               },
               {
                 method: 'INTERNATIONAL_COURIER' as const,
                 title: 'DHL Express (International Courier)',
                 desc: 'Tracked express courier dispatch worldwide to foreign institutions and employers',
-                fee: DELIVERY_FEES.INTERNATIONAL_COURIER,
+                fee: deliveryFees.INTERNATIONAL_COURIER,
                 icon: 'flight_takeoff'
               }
             ].map((opt) => (

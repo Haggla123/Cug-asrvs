@@ -1,5 +1,5 @@
-import React from 'react';
-import { INITIAL_SERVICES_CATALOGUE } from '../lib/constants';
+import React, { useState, useEffect } from 'react';
+import { TariffStorage } from '../lib/tariffStorage';
 import { formatPesewas } from '../lib/currency';
 
 interface LandingPageProps {
@@ -13,6 +13,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onTrackOrder,
   onVerifyCredentials
 }) => {
+  const [servicesCatalogue, setServicesCatalogue] = useState(() => TariffStorage.getServicesCatalogue());
+
+  useEffect(() => {
+    const handleTariffsChanged = () => {
+      setServicesCatalogue(TariffStorage.getServicesCatalogue());
+    };
+    window.addEventListener('cug_tariffs_updated', handleTariffsChanged);
+    return () => window.removeEventListener('cug_tariffs_updated', handleTariffsChanged);
+  }, []);
+
   return (
     <div className="space-y-10 pb-12">
       {/* HERO SECTION — glassy campus-photo background */}
@@ -36,7 +46,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 Order your academic documents without queuing at the office.
               </h1>
               <p className="max-w-2xl sm:mx-auto text-body-md sm:text-body-lg text-white/90 leading-relaxed">
-                Choose the documents you need and prepare a request draft. Online submission and payment are not yet available in this prototype.
+                Choose the documents you need and prepare a request draft. The Finance Office verifies your payment before documents are processed and sealed.
               </p>
               <div className="flex flex-col min-[420px]:flex-row items-stretch min-[420px]:items-center gap-3 pt-1 sm:justify-center">
                 <button
@@ -61,22 +71,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* SERVICE CATALOGUE CARDS */}
+      {/* SERVICE CATALOGUE CARDS — Set by Finance Office */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
           <span className="text-label-sm font-label-sm text-secondary uppercase font-bold tracking-wider">
-            Official Registry Catalogue
+            Official Registry Tariff Schedule
           </span>
           <h2 className="text-headline-sm sm:text-headline-md font-serif font-bold text-primary">
-            Academic Services &amp; Tariff Schedule
+            Academic Services &amp; Fees
           </h2>
           <p className="text-body-md font-body-md text-on-surface-variant">
-            All documents are prepared according to approved university registry standards with official institutional embossed seals.
+            Official tariffs approved by the CUG Directorate of Finance. All documents are prepared according to approved university standards with embossed registry seals.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {INITIAL_SERVICES_CATALOGUE.map((item) => (
+          {servicesCatalogue.map((item) => (
             <article
               key={item.id}
               className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/60 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
@@ -168,13 +178,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             {[
               {
                 step: '01',
-                title: 'Request & Pay',
-                desc: 'Fill your student details, choose document quantities, and pay securely via MoMo or Card.'
+                title: 'Request & Transfer',
+                desc: 'Fill student info, choose document quantities, and transfer fee using your Index Number as reference.'
               },
               {
                 step: '02',
-                title: 'Financial Clearance',
-                desc: 'The CUG Finance Office checks your institutional account and grants clearance.'
+                title: 'Finance Clearance',
+                desc: 'The CUG Finance Office reconciles statement credits against requested document tariffs.'
               },
               {
                 step: '03',
